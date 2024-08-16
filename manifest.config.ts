@@ -20,7 +20,8 @@ export default defineManifest(async (env) => ({
   content_scripts: [
     {
       js: ['src/content.tsx'],
-      matches: ['https://www.google.com/*'],
+      // matches: ['*://*.pearsonpte.com/*'],
+      matches: ['*://*.google.com/*'],
     },
   ],
 }));
