@@ -8,8 +8,8 @@ function App() {
 
   return (
     <>
+      <h1 className="text-3xl font-bold">Hello world!</h1>
       <div>
-        <h1 className="text-3xl font-bold">Hello world!</h1>
         <a href="https://vitejs.dev" target="_blank">
           <img src={chrome.runtime.getURL(viteLogo)} className="logo" alt="Vite logo" />
         </a>
