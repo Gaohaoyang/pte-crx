@@ -20,8 +20,16 @@ export default defineManifest(async (env) => ({
   content_scripts: [
     {
       js: ['src/content.tsx'],
-      // matches: ['*://*.pearsonpte.com/*'],
-      matches: ['*://*.google.com/*'],
+      matches: ['*://*.pearsonpte.com/*'],
+      // matches: ['https://mypte.pearsonpte.com/my-activity/test-score/*'],
+      // matches: ['*://*.google.com/*'],
     },
   ],
+  // permissions: ['webRequest'],
+  // host_permissions: ['*://*.pearsonpte.com/*'],
+  // background: {
+  //   service_worker: 'src/service-worker.ts',
+  //   type: 'module',
+  // },
+  // devtools_page: 'src/devtools.html',
 }));
