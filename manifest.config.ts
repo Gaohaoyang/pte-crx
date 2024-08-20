@@ -23,6 +23,8 @@ export default defineManifest(async (env) => ({
       matches: ['*://*.pearsonpte.com/*'],
       // matches: ['https://mypte.pearsonpte.com/my-activity/test-score/*'],
       // matches: ['*://*.google.com/*'],
+      run_at: 'document_start',
+      all_frames: true,
     },
   ],
   // permissions: ['webRequest'],
