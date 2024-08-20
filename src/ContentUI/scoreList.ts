@@ -93,3 +93,36 @@ export const getEqualScores = (
   });
   return resultItem;
 };
+
+const RA = 'RA';
+const RS = 'RS';
+const DI = 'DI';
+const RTS = 'RTS';
+const ASQ = 'ASQ';
+const SWT = 'SWT';
+const WE = 'WE';
+
+const FIBRW = 'FIB-RW';
+const MCMRW = 'MCM-RW';
+const RO = 'RO';
+const FIBR = 'FIB-R';
+const MCSR = 'MCS-R';
+
+const SST = 'SST';
+const MCML = 'MCM-L';
+const FIBL = 'FIB-L';
+const MCSL = 'MCS-L';
+const SMW = 'SMW';
+const HIW = 'HIW';
+const WFD = 'WFD';
+
+export const skillsAnalysis = {
+  openResponseSpeakingWriting: [WE, DI, RTS],
+  reproducingSpokenWrittenLanguage: [WFD, RA, RS, SST],
+  writingExtended: [WE, SST, SWT],
+  writingShort: [WFD, FIBRW, FIBL],
+  speakingExtended: [DI, RTS],
+  speakingShort: [RA, RS, ASQ],
+  multipleSkillsComprehension: [FIBRW, SST, WFD, RA, RS, SWT, HIW],
+  singleSkillComprehension: [RO, FIBR, MCMRW, MCSR, MCML, MCSL, SMW],
+};
