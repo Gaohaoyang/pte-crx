@@ -31,5 +31,11 @@ export default defineManifest(async (env) => ({
   //   service_worker: 'src/service-worker.ts',
   //   type: 'module',
   // },
+  web_accessible_resources: [
+    {
+      resources: ['injected.js'],
+      matches: ['*://*.pearsonpte.com/*'],
+    },
+  ],
   // devtools_page: 'src/devtools.html',
 }));
