@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getEqualScores, skillsAnalysis } from './scoreList';
+import { getEqualScores, skillsAnalysis, clbEEScore } from './scoreList';
 import { PTEDataType } from '../type/PTEDataType';
 import ProgressBar from './ProgressBar';
 import clsx from 'clsx';
@@ -7,7 +7,13 @@ import clsx from 'clsx';
 const ContentUI = () => {
   const [scoresComparison, setScoresComparison] = useState<
     {
-      testName: 'PTE' | 'CLB' | 'IELTS(G)';
+      testName:
+        | 'PTE'
+        | 'CLB'
+        | 'IELTS(G)'
+        | 'Points for EE(Without Spouse)'
+        | 'Points for EE(With Spouse)'
+        | 'Points for EE(As Spouse)';
       listening?: number;
       reading?: number;
       speaking?: number;
@@ -17,7 +23,8 @@ const ContentUI = () => {
   const [skillsProfile, setSkillsProfile] = useState<
     Array<{ key: string; name: string; score: number; skills: string[] }>
   >([]);
-  const [minimize, setMinimize] = useState(false);
+  const [minimize, setMinimize] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     console.log('content script start');
@@ -37,8 +44,10 @@ const ContentUI = () => {
       try {
         console.log(JSON.parse(e.data.data));
         const pteData: PTEDataType = JSON.parse(e.data.data);
+        setShowContent(true);
         // console.log('JSON', JSON.stringify(pteData));
         processData(pteData);
+
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         // console.log('error', error);
@@ -65,7 +74,13 @@ const ContentUI = () => {
     });
 
     const scoresComparisonList: {
-      testName: 'PTE' | 'CLB' | 'IELTS(G)';
+      testName:
+        | 'PTE'
+        | 'CLB'
+        | 'IELTS(G)'
+        | 'Points for EE(Without Spouse)'
+        | 'Points for EE(With Spouse)'
+        | 'Points for EE(As Spouse)';
       listening?: number;
       reading?: number;
       speaking?: number;
@@ -92,7 +107,42 @@ const ContentUI = () => {
         speaking: scoreList[2].ieltsCore,
         writing: scoreList[3].ieltsCore,
       },
+      {
+        testName: 'Points for EE(Without Spouse)',
+        // @ts-expect-error this is a number
+        listening: clbEEScore[`clb${scoreList[0].clb}`].withoutSpouse,
+        // @ts-expect-error this is a number
+        reading: clbEEScore[`clb${scoreList[1].clb}`].withoutSpouse,
+        // @ts-expect-error this is a number
+        speaking: clbEEScore[`clb${scoreList[2].clb}`].withoutSpouse,
+        // @ts-expect-error this is a number
+        writing: clbEEScore[`clb${scoreList[3].clb}`].withoutSpouse,
+      },
+      {
+        testName: 'Points for EE(With Spouse)',
+        // @ts-expect-error this is a number
+        listening: clbEEScore[`clb${scoreList[0].clb}`].withSpouse,
+        // @ts-expect-error this is a number
+        reading: clbEEScore[`clb${scoreList[1].clb}`].withSpouse,
+        // @ts-expect-error this is a number
+        speaking: clbEEScore[`clb${scoreList[2].clb}`].withSpouse,
+        // @ts-expect-error this is a number
+        writing: clbEEScore[`clb${scoreList[3].clb}`].withSpouse,
+      },
+      {
+        testName: 'Points for EE(As Spouse)',
+        // @ts-expect-error this is a number
+        listening: clbEEScore[`clb${scoreList[0].clb}`].asSpouse,
+        // @ts-expect-error this is a number
+        reading: clbEEScore[`clb${scoreList[1].clb}`].asSpouse,
+        // @ts-expect-error this is a number
+        speaking: clbEEScore[`clb${scoreList[2].clb}`].asSpouse,
+        // @ts-expect-error this is a number
+        writing: clbEEScore[`clb${scoreList[3].clb}`].asSpouse,
+      },
     ];
+
+    console.log('first', scoresComparisonList);
 
     // setScores(scoreList);
     setScoresComparison(scoresComparisonList);
@@ -127,34 +177,41 @@ const ContentUI = () => {
     }
     console.log(skillsProfile);
     setSkillsProfile(skillsProfile);
+    setTimeout(() => {
+      setMinimize(false);
+    }, 80);
   };
+
+  if (!showContent) {
+    return null;
+  }
 
   return (
     <div
       className={clsx(
-        'fixed top-16 right-10 bg-sky-50 z-[9999] rounded-xl text-xs overflow-auto text-slate-900 flex flex-col box-border shadow-xl shadow-cyan-950/55 transition-all',
-        minimize ? 'w-5 h-5 p-0 overflow-hidden' : 'w-[480px] h-[429px] p-4 ',
+        'fixed top-44 left-10 bg-sky-50 z-[9999] rounded-xl text-sm overflow-auto text-slate-900 flex flex-col box-border shadow-xl shadow-cyan-950/55 transition-all',
+        minimize ? 'w-6 h-6 p-0 overflow-hidden' : 'w-[554px] h-[557px] p-4 ',
       )}
     >
       <div
-        className="w-5 h-5 absolute top-0 right-0 cursor-pointer z-50 bg-sky-50"
+        className="w-6 h-6 absolute top-0 left-0 cursor-pointer z-50 bg-sky-50"
         onClick={() => setMinimize(() => !minimize)}
       >
         {minimize ? (
           <img
             src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/add-line.svg"
-            className="w-4 h-4 absolute top-[0.125rem] right-[0.125rem]"
+            className="w-5 h-5 absolute top-[0.125rem] left-[0.125rem]"
             alt=""
           />
         ) : (
           <img
             src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/subtract-fill.svg"
-            className="w-4 h-4 absolute top-[0.125rem] right-[0.125rem]"
+            className="w-5 h-5 absolute top-[0.125rem] left-[0.125rem]"
             alt=""
           />
         )}
       </div>
-      <div className="text-base font-bold">Score</div>
+      <div className="text-base font-bold mt-1">Score</div>
       <table className="mt-1 text-center border-collapse w-full border-y-2 border-slate-400">
         <thead className="border-b border-slate-400">
           <tr>
@@ -163,25 +220,58 @@ const ContentUI = () => {
             <th className="px-2">Reading</th>
             <th className="px-2">Speaking</th>
             <th className="px-2">Writing</th>
+            <th className="px-2 border-l border-slate-400">Total</th>
           </tr>
         </thead>
         <tbody className="">
           {scoresComparison.map((item) => (
-            <tr key={item.testName}>
+            <tr
+              key={item.testName}
+              className="even:bg-blue-50 odd:bg-blue-100 hover:bg-slate-300 transition-colors"
+            >
               {item.testName === 'PTE' && (
-                <td className="border-r border-slate-400 px-2">Your PTE Score</td>
+                <td className="border-r border-slate-400 px-2 text-right">Your PTE score</td>
               )}
 
-              {item.testName === 'CLB' && <td className="border-r border-slate-400 px-2">CLB</td>}
+              {item.testName === 'CLB' && (
+                <td className="border-r border-slate-400 px-2 text-right">CLB</td>
+              )}
 
               {item.testName === 'IELTS(G)' && (
-                <td className="border-r border-slate-400 px-2"> = IELTS(G)</td>
+                <td className="border-r border-slate-400 px-2 text-right">
+                  Equivalent to IELTS(G) score
+                </td>
+              )}
+
+              {item.testName === 'Points for EE(Without Spouse)' && (
+                <td className="border-r border-slate-400 px-2 text-right">
+                  Pts for EE (Without Spouse)
+                </td>
+              )}
+
+              {item.testName === 'Points for EE(With Spouse)' && (
+                <td className="border-r border-slate-400 px-2 text-right">
+                  Pts for EE (With Spouse)
+                </td>
+              )}
+              {item.testName === 'Points for EE(As Spouse)' && (
+                <td className="border-r border-slate-400 px-2 text-right">
+                  Pts for EE (As Spouse)
+                </td>
               )}
 
               <td>{item.listening}</td>
               <td>{item.reading}</td>
               <td>{item.speaking}</td>
               <td>{item.writing}</td>
+
+              <td className="border-l border-slate-400">
+                {item.testName === 'Points for EE(Without Spouse)' ||
+                item.testName === 'Points for EE(With Spouse)' ||
+                item.testName === 'Points for EE(As Spouse)'
+                  ? item.listening! + item.reading! + item.speaking! + item.writing!
+                  : ''}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -189,13 +279,23 @@ const ContentUI = () => {
       <div className="mt-2 text-base font-bold">Sub Skills Score</div>
       <div className="mt-1">
         {skillsProfile.map((skill) => (
-          <div key={skill.key} className="mb-3 text-xs">
-            {/* {skill.score} {skill.skills.join(', ')} */}
+          <div key={skill.key} className="mb-3">
             <div className="flex justify-between items-center">
-              <div className="text-slate-500">{skill.name}</div>
-              <div className="flex justify-end items-center ml-4">
+              <div className="text-slate-700">{skill.name}</div>
+              <div className="flex justify-end items-center ml-4 mb-[1px]">
                 <div className="">{skill.skills.join(', ')}</div>
-                <div className="ml-2">{skill.score}</div>
+                <div
+                  className={clsx(
+                    'ml-2 font-bold',
+                    skill.score < 80
+                      ? skill.score < 60
+                        ? 'text-red-700'
+                        : 'text-yellow-600'
+                      : 'text-green-700',
+                  )}
+                >
+                  {skill.score}
+                </div>
               </div>
             </div>
             <ProgressBar progress={skill.score} />

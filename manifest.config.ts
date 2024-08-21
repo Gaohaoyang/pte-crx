@@ -20,7 +20,7 @@ export default defineManifest(async (env) => ({
   content_scripts: [
     {
       js: ['src/content.tsx'],
-      matches: ['*://*.pearsonpte.com/*'],
+      matches: ['https://mypte.pearsonpte.com/*'],
       // matches: ['https://mypte.pearsonpte.com/my-activity/test-score/*'],
       // matches: ['*://*.google.com/*'],
       run_at: 'document_start',
@@ -28,7 +28,7 @@ export default defineManifest(async (env) => ({
     },
   ],
   // permissions: ['webRequest'],
-  // host_permissions: ['*://*.pearsonpte.com/*'],
+  // host_permissions: ['https://mypte.pearsonpte.com/*'],
   // background: {
   //   service_worker: 'src/service-worker.ts',
   //   type: 'module',
@@ -36,7 +36,7 @@ export default defineManifest(async (env) => ({
   web_accessible_resources: [
     {
       resources: ['injected.js'],
-      matches: ['*://*.pearsonpte.com/*'],
+      matches: ['https://mypte.pearsonpte.com/*'],
     },
   ],
   // devtools_page: 'src/devtools.html',

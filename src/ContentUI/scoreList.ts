@@ -78,6 +78,44 @@ export const scoreList = [
   },
 ];
 
+export const clbEEScore = {
+  clb10: {
+    withoutSpouse: 34,
+    withSpouse: 32,
+    asSpouse: 5,
+  },
+  clb9: {
+    withoutSpouse: 31,
+    withSpouse: 29,
+    asSpouse: 5,
+  },
+  clb8: {
+    withoutSpouse: 23,
+    withSpouse: 22,
+    asSpouse: 3,
+  },
+  clb7: {
+    withoutSpouse: 17,
+    withSpouse: 16,
+    asSpouse: 3,
+  },
+  clb6: {
+    withoutSpouse: 9,
+    withSpouse: 8,
+    asSpouse: 1,
+  },
+  clb5: {
+    withoutSpouse: 6,
+    withSpouse: 6,
+    asSpouse: 1,
+  },
+  clb4: {
+    withoutSpouse: 0,
+    withSpouse: 0,
+    asSpouse: 0,
+  },
+};
+
 export const getEqualScores = (
   scoreValue: string,
   type: 'Listening' | 'Speaking' | 'Reading' | 'Writing',
