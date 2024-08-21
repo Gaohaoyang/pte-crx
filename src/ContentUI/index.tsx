@@ -27,7 +27,8 @@ const ContentUI = () => {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    console.log('content script start');
+    console.log('PTE core Sub-skills Chrome Extension is working.');
+    // console.log('content script start');
     // inject injected script
     const s = document.createElement('script');
     s.src = chrome.runtime.getURL('injected.js');
@@ -42,7 +43,7 @@ const ContentUI = () => {
       // console.log('content script received:', e.data.type, e.data.data);
       // console.log(typeof e.data.data);
       try {
-        console.log(JSON.parse(e.data.data));
+        // console.log(JSON.parse(e.data.data));
         const pteData: PTEDataType = JSON.parse(e.data.data);
         setShowContent(true);
         // console.log('JSON', JSON.stringify(pteData));
@@ -142,7 +143,7 @@ const ContentUI = () => {
       },
     ];
 
-    console.log('first', scoresComparisonList);
+    // console.log('first', scoresComparisonList);
 
     // setScores(scoreList);
     setScoresComparison(scoresComparisonList);
@@ -175,7 +176,6 @@ const ContentUI = () => {
         skillsProfile.push({ key, name: showName, score: element, skills: skillsAnalysis[key] });
       }
     }
-    console.log(skillsProfile);
     setSkillsProfile(skillsProfile);
     setTimeout(() => {
       setMinimize(false);
@@ -276,7 +276,7 @@ const ContentUI = () => {
           ))}
         </tbody>
       </table>
-      <div className="mt-2 text-base font-bold">Sub Skills Score</div>
+      <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
       <div className="mt-1">
         {skillsProfile.map((skill) => (
           <div key={skill.key} className="mb-3">

@@ -27,6 +27,7 @@ export default defineManifest(async (env) => ({
       all_frames: true,
     },
   ],
+  permissions: ['tabs'],
   // permissions: ['webRequest'],
   // host_permissions: ['https://mypte.pearsonpte.com/*'],
   // background: {
@@ -34,6 +35,10 @@ export default defineManifest(async (env) => ({
   //   type: 'module',
   // },
   web_accessible_resources: [
+    {
+      resources: ['DonationList.html'],
+      matches: ['<all_urls>'],
+    },
     {
       resources: ['injected.js'],
       matches: ['https://mypte.pearsonpte.com/*'],

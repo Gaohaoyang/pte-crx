@@ -1,31 +1,41 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from './assets/vite.svg';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1 className="text-3xl font-bold">Hello world!</h1>
+    <div className="p-4 bg-slate-50 text-slate-800 text-sm w-96">
+      <h1 className="text-lg font-bold text-center">Welcome to use</h1>
+      <h1 className="text-2xl font-bold text-center">PTE Core Sub-Skills</h1>
+      <h1 className="text-lg font-bold text-center">Chrome Extension!</h1>
+      <ul className="mt-2">
+        <li>
+          1. Visit your{' '}
+          <a
+            href="https://mypte.pearsonpte.com/my-activity"
+            onClick={() => {
+              chrome.tabs.create({ url: 'https://mypte.pearsonpte.com/my-activity' });
+            }}
+          >
+            PTE score page
+          </a>
+        </li>
+        <li>2. Then you'll see a panel including your sub-scores, CLB levels, etc.</li>
+      </ul>
+      <div className="mt-2">
+        If you found this helpful, feel free to sponsor me for a cup of coffee! ☕ :)
+      </div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={chrome.runtime.getURL(viteLogo)} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={chrome.runtime.getURL(reactLogo)} className="logo react" alt="React logo" />
-        </a>
+        Your name will appear on the{' '}
+        <a
+          href=""
+          onClick={() => {
+            chrome.tabs.create({ url: chrome.runtime.getURL('DonationList.html') });
+          }}
+        >
+          donation list.
+        </a>{' '}
+        ⭐
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    </div>
   );
 }
 
