@@ -2,7 +2,7 @@ type Props = {
   progress: number;
   total?: number;
 };
-const ProgressBar = (props) => {
+const ProgressBar = (props: Props) => {
   const { progress, total = 90 } = props;
   return (
     <div className="w-full h-1 bg-slate-300 rounded-sm">
