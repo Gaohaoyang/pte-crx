@@ -18,7 +18,7 @@ export default defineManifest(async (env) => ({
     "128": "images/128.png",
   },
   name: env.mode === 'staging' ? '[INTERNAL] PTE Core Sub-Scores' : 'PTE Core Sub-Scores',
-  description: 'PTE Core Sub-Scores Chrome Extension. Visit your PTE score page, then you will see a panel including your sub-scores, CLB levels, etc.',
+  description: 'PTE Core Sub-Scores. Visit your PTE score page, then you will see a panel including your sub-scores, CLB levels, etc.',
   version: `${major}.${minor}.${patch}.${label}`,
   version_name: version,
   action: { default_popup: 'index.html' },
