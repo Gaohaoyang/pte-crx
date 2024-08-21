@@ -27,7 +27,7 @@ const ContentUI = () => {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    console.log('PTE core Sub-skills Chrome Extension is working.');
+    console.log('PTE core Sub-Scores Chrome Extension is working.');
     // console.log('content script start');
     // inject injected script
     const s = document.createElement('script');

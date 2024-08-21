@@ -11,29 +11,26 @@ const [major, minor, patch, label = '0'] = version
 
 export default defineManifest(async (env) => ({
   manifest_version: 3,
-  name: env.mode === 'staging' ? '[INTERNAL] CRXJS Power Tools' : 'CRXJS Power Tools',
-  // up to four numbers separated by dots
+  icons: {
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "48": "images/48.png",
+    "128": "images/128.png",
+  },
+  name: env.mode === 'staging' ? '[INTERNAL] PTE Core Sub-Scores' : 'PTE Core Sub-Scores',
+  description: 'PTE Core Sub-Scores Chrome Extension. Visit your PTE score page, then you will see a panel including your sub-scores, CLB levels, etc.',
   version: `${major}.${minor}.${patch}.${label}`,
-  // semver is OK in "version_name"
   version_name: version,
   action: { default_popup: 'index.html' },
   content_scripts: [
     {
       js: ['src/content.tsx'],
       matches: ['https://mypte.pearsonpte.com/*'],
-      // matches: ['https://mypte.pearsonpte.com/my-activity/test-score/*'],
-      // matches: ['*://*.google.com/*'],
       run_at: 'document_start',
       all_frames: true,
     },
   ],
   permissions: ['tabs'],
-  // permissions: ['webRequest'],
-  // host_permissions: ['https://mypte.pearsonpte.com/*'],
-  // background: {
-  //   service_worker: 'src/service-worker.ts',
-  //   type: 'module',
-  // },
   web_accessible_resources: [
     {
       resources: ['DonationList.html'],
@@ -44,5 +41,4 @@ export default defineManifest(async (env) => ({
       matches: ['https://mypte.pearsonpte.com/*'],
     },
   ],
-  // devtools_page: 'src/devtools.html',
 }));
