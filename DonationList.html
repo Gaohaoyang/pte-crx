@@ -16,53 +16,77 @@
       }
     </style>
   </head>
-  <body style="font-size: 14px; display: flex; flex-direction: column; align-items: center">
-    <h1>Thank you for your support with the PTE Core Sub-Scores Chrome Extension!</h1>
-    <p style="font-weight: bold; font-size: 18px">I really appreciate it. Have a great day! :)</p>
-    <div style="margin-top: 12px">
-      <div style="margin-bottom: 6px; text-align: right" id="lastUpdated">
-        Last updated: 2024-08-20
+  <body
+    style="
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    "
+  >
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+        width: 100%;
+      "
+    >
+      <h1>Thank you for your support with the PTE Core Sub-Scores Chrome Extension!</h1>
+      <p style="font-weight: bold; font-size: 18px">I really appreciate it. Have a great day! :)</p>
+      <div style="margin-top: 12px">
+        <div style="margin-bottom: 6px; text-align: right" id="lastUpdated">
+          Last updated: 2024-08-20
+        </div>
+        <table
+          style="
+            border-collapse: collapse;
+            border-top: 2px solid #888;
+            border-bottom: 2px solid #888;
+            text-align: left;
+          "
+        >
+          <thead>
+            <tr style="border-bottom: 1px solid #888">
+              <th>Name</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Method</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody id="donationList">
+            <tr>
+              <td>T*m L*</td>
+              <td>2024-08-20</td>
+              <td>CA$5.00</td>
+              <td><i>Interac</i> e-Transfer</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="height: 48px"></div>
       </div>
-      <table
-        style="
-          border-collapse: collapse;
-          border-top: 2px solid #888;
-          border-bottom: 2px solid #888;
-          text-align: left;
-        "
-      >
-        <thead>
-          <tr style="border-bottom: 1px solid #888">
-            <th>Name</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Method</th>
-            <th>Message</th>
-          </tr>
-        </thead>
-        <tbody id="donationList">
-          <tr>
-            <td>T*m L*</td>
-            <td>2024-08-20</td>
-            <td>CA$5.00</td>
-            <td><i>Interac</i> e-Transfer</td>
-            <td>-</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-
+    <!-- <div style="height: 570px;"></div> -->
     <div
       style="
         position: fixed;
+        z-index: 1000;
         left: 0;
         bottom: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%;
+        height: 240px;
         box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.2);
-        padding: 24px;
+        padding: 16px;
         box-sizing: border-box;
       "
     >
@@ -117,56 +141,6 @@
           </div>
         </div>
       </div>
-      <!-- <table
-        style="
-          border-collapse: collapse;
-          border-top: 2px solid #888;
-          border-bottom: 2px solid #888;
-          text-align: center;
-        "
-      >
-        <tbody>
-          <tr style="border-bottom: 1px solid #888">
-            <td><i>Interac</i> e-Transfer</td>
-            <td>gaohaoyang126@outlook.com</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #888">
-            <td>PayPal</td>
-            <td style="display: flex; flex-direction: column; align-items: center">
-              <img
-                style="width: 200px"
-                src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/QR%20Code.png"
-                alt=""
-              />
-              <a
-                href="https://www.paypal.com/donate/?business=NB2D3UXSQKDKU&no_recurring=0&item_name=Thanks+for+your+support%21+I+really+appreciate+it.+Have+a+great+day%21&currency_code=CAD"
-              >
-                PayPal Donation Link
-              </a>
-            </td>
-          </tr>
-          <tr style="border-bottom: 1px solid #888">
-            <td>Wechat Pay</td>
-            <td>
-              <img
-                style="width: 200px"
-                src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/wechatPay.png"
-                alt=""
-              />
-            </td>
-          </tr>
-          <tr style="border-bottom: 1px solid #888">
-            <td>AliPay</td>
-            <td>
-              <img
-                style="width: 200px"
-                src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/Alipay.png"
-                alt=""
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
     </div>
   </body>
 </html>
