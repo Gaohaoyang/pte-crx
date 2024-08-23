@@ -1,50 +1,61 @@
-# React + TypeScript + Vite
+# PTE Core Sub-Scores
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chrome Extension for PTE Core Sub-Scores. Visit your PTE score page, then you will see a panel including your sub-scores, CLB levels, etc.
 
-Currently, two official plugins are available:
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/1.png" alt="PTE core sub-scores" width="640"/>
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Get the full potential of your PTE Core Sub-Scores! Simply visit your PTE score page, where you’ll find a detailed breakdown of your performance, including your sub-scores, CLB levels, and more. Dive into this insightful panel to better understand your strengths and areas for improvement. Take control of your PTE journey today!
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **PTE Core Sub-Scores**
+- **PTE Core Sub-Scores Breakdown**
+- **CLB Levels**
+- **Equivalent to IELTS (G) Score**
+- **Points for EE** (With or Without Spouse, or As a Spouse)
+- **Draggable Panel**
 
-- Configure the top-level `parserOptions` property like this:
+## How to use
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+<ul className="mt-1">
+  <li>
+    1. Visit your
+    <a
+      className="text-blue-600"
+      href="https://mypte.pearsonpte.com/my-activity"
+    >
+      PTE score page
+    </a>
+  </li>
+  <li>2. Then you'll see a panel including your sub-scores, CLB levels, etc.</li>
+</ul>
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+![](https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/0.png)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Donation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+If you found this helpful, feel free to sponsor me for a cup of coffee! ☕ :)
+
+Your name will appear on the donation list.
+
+Donation methods:
+
+- Github Sponsors
+  - https://github.com/sponsors/Gaohaoyang
+- Paypal
+  - [PayPal Donation Link](https://www.paypal.com/donate/?business=NB2D3UXSQKDKU&no_recurring=0&item_name=Thanks+for+your+support%21+I+really+appreciate+it.+Have+a+great+day%21&currency_code=CAD)
+
+  <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/QR%20Code.png" width="250"/>
+
+
+
+- Wechat Pay
+
+  <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/wechatPay.png" width="250"/>
+- AliPay
+
+  <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/Alipay.png" width="250"/>
+
+Enjoy it! :smile:
