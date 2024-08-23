@@ -20,16 +20,16 @@ Get the full potential of your PTE Core Sub-Scores! Simply visit your PTE score 
 ## How to use
 
 <ul className="mt-1">
+  <li>1. Install the <a href="https://chromewebstore.google.com/detail/pte-core-sub-scores/hibclclepijigjnfdkmkfhjogfhgicda">PTE Core Sub-Scores Chrome Extension from the Chrome Web Store</a></li>
   <li>
-    1. Visit your
+    2. Visit your
     <a
-      className="text-blue-600"
       href="https://mypte.pearsonpte.com/my-activity"
     >
-      PTE score page
+      PTE score page.
     </a>
+    Then you'll see a panel including your sub-scores, CLB levels, etc.
   </li>
-  <li>2. Then you'll see a panel including your sub-scores, CLB levels, etc.</li>
 </ul>
 
 ![](https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/0.png)
@@ -45,15 +45,15 @@ Donation methods:
 - Github Sponsors
   - https://github.com/sponsors/Gaohaoyang
 - Paypal
+
   - [PayPal Donation Link](https://www.paypal.com/donate/?business=NB2D3UXSQKDKU&no_recurring=0&item_name=Thanks+for+your+support%21+I+really+appreciate+it.+Have+a+great+day%21&currency_code=CAD)
 
   <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/QR%20Code.png" width="250"/>
 
-
-
 - Wechat Pay
 
   <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/wechatPay.png" width="250"/>
+
 - AliPay
 
   <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/Alipay.png" width="250"/>
