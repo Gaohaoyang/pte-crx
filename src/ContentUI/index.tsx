@@ -200,11 +200,11 @@ const ContentUI = () => {
           setDragging(false);
         }}
       >
-        <div className="fixed top-44 left-10 z-[9999]">
+        <div className="fixed top-40 left-10 z-[9999]">
           <div
             className={clsx(
               'bg-sky-50 rounded-xl text-sm overflow-auto text-slate-900 flex flex-col box-border shadow-cyan-950/55 transition-all',
-              minimize ? 'w-6 h-6 p-0 overflow-hidden' : 'w-[554px] h-[557px] p-4',
+              minimize ? 'w-6 h-6 p-0 overflow-hidden' : 'w-[554px] h-[557px] max-h-[70vh] p-4',
               dragging ? 'scale-105 shadow-2xl' : 'scale-100 shadow-md',
             )}
           >
