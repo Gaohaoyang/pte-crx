@@ -1,0 +1,61 @@
+name: npm build and publish
+
+# 执行脚本的生命周期
+on:
+  #选择在 push 到 github 时触发工作流
+  push:
+    #分支可以选择多个
+    branches: [main]
+
+# 一个 workflow 可以有多个 job
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: write
+    # 指定操作系统为'ubuntu-latest'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Version Check
+        id: check
+        uses: EndBug/version-check@v2
+        with:
+          diff-search: true
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+        if: steps.check.outputs.changed == 'true'
+
+      - name: Node env setup
+        uses: actions/setup-node@v4
+        if: steps.check.outputs.changed == 'true'
+        with:
+          node-version: lts/*
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: pnpm i
+        if: steps.check.outputs.changed == 'true'
+      # 发布命令
+
+      - run: pnpm run build && pnpm publish
+        if: steps.check.outputs.changed == 'true'
+        env:
+          # npm_token 就是刚刚填写 token 时取的名字
+          NODE_AUTH_TOKEN: ${{ secrets.NPMPUBHAOYANG }}
+          NPM_CONFIG_PROVENANCE: true
+      - name: Create a tag
+        uses: salsify/action-detect-and-tag-new-version@v2
+        if: steps.check.outputs.changed == 'true'
+
+      - run: npx changelogithub
+        if: steps.check.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
