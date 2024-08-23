@@ -43,19 +43,22 @@ jobs:
 
       - run: pnpm i
         if: steps.check.outputs.changed == 'true'
-      # 发布命令
 
-      - run: pnpm run build && pnpm publish
-        if: steps.check.outputs.changed == 'true'
-        env:
-          # npm_token 就是刚刚填写 token 时取的名字
-          NODE_AUTH_TOKEN: ${{ secrets.NPMPUBHAOYANG }}
-          NPM_CONFIG_PROVENANCE: true
-      - name: Create a tag
-        uses: salsify/action-detect-and-tag-new-version@v2
+      - run: pnpm run build
         if: steps.check.outputs.changed == 'true'
 
-      - run: npx changelogithub
+      - name: zip
         if: steps.check.outputs.changed == 'true'
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r dist.zip dist
+
+      - name: Upload & release
+        if: steps.check.outputs.changed == 'true'
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: dist.zip
+          extension-id: hibclclepijigjnfdkmkfhjogfhgicda
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
