@@ -1,0 +1,64 @@
+name: npm build and publish
+
+# 执行脚本的生命周期
+on:
+  #选择在 push 到 github 时触发工作流
+  push:
+    #分支可以选择多个
+    branches: [main]
+
+# 一个 workflow 可以有多个 job
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: write
+    # 指定操作系统为'ubuntu-latest'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Version Check
+        id: check
+        uses: EndBug/version-check@v2
+        with:
+          diff-search: true
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+        if: steps.check.outputs.changed == 'true'
+
+      - name: Node env setup
+        uses: actions/setup-node@v4
+        if: steps.check.outputs.changed == 'true'
+        with:
+          node-version: lts/*
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: pnpm i
+        if: steps.check.outputs.changed == 'true'
+
+      - run: pnpm run build
+        if: steps.check.outputs.changed == 'true'
+
+      - name: zip
+        if: steps.check.outputs.changed == 'true'
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r dist.zip dist
+
+      - name: Upload & release
+        if: steps.check.outputs.changed == 'true'
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: dist.zip
+          extension-id: hibclclepijigjnfdkmkfhjogfhgicda
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}

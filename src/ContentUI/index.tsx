@@ -3,6 +3,7 @@ import { getEqualScores, skillsAnalysis, clbEEScore } from './scoreList';
 import { PTEDataType } from '../type/PTEDataType';
 import ProgressBar from './ProgressBar';
 import clsx from 'clsx';
+import Draggable from 'react-draggable';
 
 const ContentUI = () => {
   const [scoresComparison, setScoresComparison] = useState<
@@ -182,127 +183,154 @@ const ContentUI = () => {
     }, 80);
   };
 
+  const [dragging, setDragging] = useState(false);
+
   if (!showContent) {
     return null;
   }
 
   return (
-    <div
-      className={clsx(
-        'fixed top-44 left-10 bg-sky-50 z-[9999] rounded-xl text-sm overflow-auto text-slate-900 flex flex-col box-border shadow-xl shadow-cyan-950/55 transition-all',
-        minimize ? 'w-6 h-6 p-0 overflow-hidden' : 'w-[554px] h-[557px] p-4 ',
-      )}
-    >
-      <div
-        className="w-6 h-6 absolute top-0 left-0 cursor-pointer z-50 bg-sky-50"
-        onClick={() => setMinimize(() => !minimize)}
+    <>
+      <Draggable
+        handle="strong"
+        onStart={() => {
+          setDragging(true);
+        }}
+        onStop={() => {
+          setDragging(false);
+        }}
       >
-        {minimize ? (
-          <img
-            src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/add-line.svg"
-            className="w-5 h-5 absolute top-[0.125rem] left-[0.125rem]"
-            alt=""
-          />
-        ) : (
-          <img
-            src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/subtract-fill.svg"
-            className="w-5 h-5 absolute top-[0.125rem] left-[0.125rem]"
-            alt=""
-          />
-        )}
-      </div>
-      <div className="text-base font-bold mt-1">Score</div>
-      <table className="mt-1 text-center border-collapse w-full border-y-2 border-slate-400">
-        <thead className="border-b border-slate-400">
-          <tr>
-            <th className="border-r border-slate-400"></th>
-            <th className="px-2">Listening</th>
-            <th className="px-2">Reading</th>
-            <th className="px-2">Speaking</th>
-            <th className="px-2">Writing</th>
-            <th className="px-2 border-l border-slate-400">Total</th>
-          </tr>
-        </thead>
-        <tbody className="">
-          {scoresComparison.map((item) => (
-            <tr
-              key={item.testName}
-              className="even:bg-blue-50 odd:bg-blue-100 hover:bg-slate-300 transition-colors"
+        <div className="fixed top-40 left-10 z-[9999]">
+          <div
+            className={clsx(
+              'bg-sky-50 rounded-xl text-sm overflow-auto text-slate-900 flex flex-col box-border shadow-cyan-950/55 transition-all',
+              minimize ? 'w-6 h-6 p-0 overflow-hidden' : 'w-[554px] h-[557px] max-h-[70vh] p-4',
+              dragging ? 'scale-105 shadow-2xl' : 'scale-100 shadow-md',
+            )}
+          >
+            <strong
+              className={clsx(
+                'w-full h-6 hover:bg-slate-200/75 absolute top-0 left-0 cursor-move rounded-t-full rounded-bl-full transition-colors duration-300',
+                dragging && 'bg-slate-200/75',
+              )}
             >
-              {item.testName === 'PTE' && (
-                <td className="border-r border-slate-400 px-2 text-right">Your PTE score</td>
-              )}
-
-              {item.testName === 'CLB' && (
-                <td className="border-r border-slate-400 px-2 text-right">CLB</td>
-              )}
-
-              {item.testName === 'IELTS(G)' && (
-                <td className="border-r border-slate-400 px-2 text-right">
-                  Equivalent to IELTS(G) score
-                </td>
-              )}
-
-              {item.testName === 'Points for EE(Without Spouse)' && (
-                <td className="border-r border-slate-400 px-2 text-right">
-                  Pts for EE (Without Spouse)
-                </td>
-              )}
-
-              {item.testName === 'Points for EE(With Spouse)' && (
-                <td className="border-r border-slate-400 px-2 text-right">
-                  Pts for EE (With Spouse)
-                </td>
-              )}
-              {item.testName === 'Points for EE(As Spouse)' && (
-                <td className="border-r border-slate-400 px-2 text-right">
-                  Pts for EE (As Spouse)
-                </td>
-              )}
-
-              <td>{item.listening}</td>
-              <td>{item.reading}</td>
-              <td>{item.speaking}</td>
-              <td>{item.writing}</td>
-
-              <td className="border-l border-slate-400">
-                {item.testName === 'Points for EE(Without Spouse)' ||
-                item.testName === 'Points for EE(With Spouse)' ||
-                item.testName === 'Points for EE(As Spouse)'
-                  ? item.listening! + item.reading! + item.speaking! + item.writing!
-                  : ''}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
-      <div className="mt-1">
-        {skillsProfile.map((skill) => (
-          <div key={skill.key} className="mb-3">
-            <div className="flex justify-between items-center">
-              <div className="text-slate-700">{skill.name}</div>
-              <div className="flex justify-end items-center ml-4 mb-[1px]">
-                <div className="">{skill.skills.join(', ')}</div>
-                <div
-                  className={clsx(
-                    'ml-2 font-bold',
-                    skill.score < 80
-                      ? skill.score < 60
-                        ? 'text-red-700'
-                        : 'text-yellow-600'
-                      : 'text-green-700',
-                  )}
-                >
-                  {skill.score}
-                </div>
+              <div
+                className="w-6 h-6 absolute top-0 left-0 cursor-pointer z-50 bg-sky-50 rounded-full shadow-sm"
+                onClick={() => {
+                  setMinimize(() => !minimize);
+                }}
+                onMouseDown={(e) => e.stopPropagation()}
+              >
+                {minimize ? (
+                  <img
+                    src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/add-line.svg"
+                    className="w-5 h-5 absolute top-[0.125rem] left-[0.125rem]"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/subtract-fill.svg"
+                    className="w-5 h-5 absolute top-[0.125rem] left-[0.125rem]"
+                    alt=""
+                  />
+                )}
               </div>
+            </strong>
+            <div className="text-base font-bold mt-1">Score</div>
+            <table className="mt-1 text-center border-collapse w-full border-y-2 border-slate-400">
+              <thead className="border-b border-slate-400">
+                <tr>
+                  <th className="border-r border-slate-400"></th>
+                  <th className="px-2">Listening</th>
+                  <th className="px-2">Reading</th>
+                  <th className="px-2">Speaking</th>
+                  <th className="px-2">Writing</th>
+                  <th className="px-2 border-l border-slate-400">Total</th>
+                </tr>
+              </thead>
+              <tbody className="">
+                {scoresComparison.map((item) => (
+                  <tr
+                    key={item.testName}
+                    className="even:bg-blue-50 odd:bg-blue-100 hover:bg-slate-300 transition-colors"
+                  >
+                    {item.testName === 'PTE' && (
+                      <td className="border-r border-slate-400 px-2 text-right">Your PTE score</td>
+                    )}
+
+                    {item.testName === 'CLB' && (
+                      <td className="border-r border-slate-400 px-2 text-right">CLB</td>
+                    )}
+
+                    {item.testName === 'IELTS(G)' && (
+                      <td className="border-r border-slate-400 px-2 text-right">
+                        Equivalent to IELTS(G) score
+                      </td>
+                    )}
+
+                    {item.testName === 'Points for EE(Without Spouse)' && (
+                      <td className="border-r border-slate-400 px-2 text-right">
+                        Pts for EE (Without Spouse)
+                      </td>
+                    )}
+
+                    {item.testName === 'Points for EE(With Spouse)' && (
+                      <td className="border-r border-slate-400 px-2 text-right">
+                        Pts for EE (With Spouse)
+                      </td>
+                    )}
+                    {item.testName === 'Points for EE(As Spouse)' && (
+                      <td className="border-r border-slate-400 px-2 text-right">
+                        Pts for EE (As Spouse)
+                      </td>
+                    )}
+
+                    <td>{item.listening}</td>
+                    <td>{item.reading}</td>
+                    <td>{item.speaking}</td>
+                    <td>{item.writing}</td>
+
+                    <td className="border-l border-slate-400">
+                      {item.testName === 'Points for EE(Without Spouse)' ||
+                      item.testName === 'Points for EE(With Spouse)' ||
+                      item.testName === 'Points for EE(As Spouse)'
+                        ? item.listening! + item.reading! + item.speaking! + item.writing!
+                        : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
+            <div className="mt-1">
+              {skillsProfile.map((skill) => (
+                <div key={skill.key} className="mb-3">
+                  <div className="flex justify-between items-center">
+                    <div className="text-slate-700">{skill.name}</div>
+                    <div className="flex justify-end items-center ml-4 mb-[1px]">
+                      <div className="">{skill.skills.join(', ')}</div>
+                      <div
+                        className={clsx(
+                          'ml-2 font-bold',
+                          skill.score < 80
+                            ? skill.score < 60
+                              ? 'text-red-700'
+                              : 'text-yellow-600'
+                            : 'text-green-700',
+                        )}
+                      >
+                        {skill.score}
+                      </div>
+                    </div>
+                  </div>
+                  <ProgressBar progress={skill.score} />
+                </div>
+              ))}
             </div>
-            <ProgressBar progress={skill.score} />
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      </Draggable>
+    </>
   );
 };
 
