@@ -76,7 +76,7 @@ export const scoreList = [
     ieltsListening: 4.5,
     ieltsSpeaking: 4.0,
   },
-];
+]
 
 export const clbEEScore = {
   clb10: {
@@ -114,45 +114,47 @@ export const clbEEScore = {
     withSpouse: 0,
     asSpouse: 0,
   },
-};
+}
 
 export const getEqualScores = (
   scoreValue: string,
   type: 'Listening' | 'Speaking' | 'Reading' | 'Writing',
 ) => {
-  const scoreValueNum = Number(scoreValue);
+  const scoreValueNum = Number(scoreValue)
   const resultItem = scoreList.find((item) => {
-    const pteTypeScore = item[`pte${type}`];
+    const pteTypeScore = item[`pte${type}`]
     if (pteTypeScore.length > 1) {
-      return scoreValueNum <= pteTypeScore[1] && scoreValueNum >= pteTypeScore[0];
+      return (
+        scoreValueNum <= pteTypeScore[1] && scoreValueNum >= pteTypeScore[0]
+      )
     } else {
-      return scoreValueNum === pteTypeScore[0];
+      return scoreValueNum === pteTypeScore[0]
     }
-  });
-  return resultItem;
-};
+  })
+  return resultItem
+}
 
-const RA = 'RA';
-const RS = 'RS';
-const DI = 'DI';
-const RTS = 'RTS';
-const ASQ = 'ASQ';
-const SWT = 'SWT';
-const WE = 'WE';
+const RA = 'RA'
+const RS = 'RS'
+const DI = 'DI'
+const RTS = 'RTS'
+const ASQ = 'ASQ'
+const SWT = 'SWT'
+const WE = 'WE'
 
-const FIBRW = 'FIB-RW';
-const MCMRW = 'MCM-RW';
-const RO = 'RO';
-const FIBR = 'FIB-R';
-const MCSR = 'MCS-R';
+const FIBRW = 'FIB-RW'
+const MCMRW = 'MCM-RW'
+const RO = 'RO'
+const FIBR = 'FIB-R'
+const MCSR = 'MCS-R'
 
-const SST = 'SST';
-const MCML = 'MCM-L';
-const FIBL = 'FIB-L';
-const MCSL = 'MCS-L';
-const SMW = 'SMW';
-const HIW = 'HIW';
-const WFD = 'WFD';
+const SST = 'SST'
+const MCML = 'MCM-L'
+const FIBL = 'FIB-L'
+const MCSL = 'MCS-L'
+const SMW = 'SMW'
+const HIW = 'HIW'
+const WFD = 'WFD'
 
 export const skillsAnalysis = {
   openResponseSpeakingWriting: [WE, DI, RTS],
@@ -163,4 +165,4 @@ export const skillsAnalysis = {
   speakingShort: [RA, RS, ASQ],
   multipleSkillsComprehension: [FIBRW, SST, WFD, RA, RS, SWT, HIW],
   singleSkillComprehension: [RO, FIBR, MCMRW, MCSR, MCML, MCSL, SMW],
-};
+}

@@ -32,10 +32,10 @@ export default defineManifest(async (env) => ({
   ],
   permissions: ['tabs'],
   web_accessible_resources: [
-    {
-      resources: ['DonationList.html'],
-      matches: ['<all_urls>'],
-    },
+    // {
+    //   resources: ['DonationList.html'],
+    //   matches: ['<all_urls>'],
+    // },
     {
       resources: ['injected.js'],
       matches: ['https://mypte.pearsonpte.com/*'],
