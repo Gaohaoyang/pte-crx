@@ -217,7 +217,7 @@ const ContentUI = () => {
               minimize
                 ? 'h-6 w-6 overflow-hidden p-0'
                 : 'h-[576px] max-h-[71vh] w-[554px] p-4',
-              dragging ? 'scale-105 shadow-2xl' : 'scale-100 shadow-md',
+              dragging ? 'scale-[1.02] shadow-2xl' : 'scale-100 shadow-md',
             )}
           >
             <strong
@@ -345,14 +345,15 @@ const ContentUI = () => {
                   <ProgressBar progress={skill.score} />
                 </div>
               ))}
-              <div className="text-right opacity-0 hover:opacity-100">
+              <div className="text-right">
                 <a
-                  className="w-full text-xs font-semibold text-blue-700"
+                  className="w-full text-sm font-semibold text-sky-700 !no-underline opacity-10 transition-opacity hover:opacity-100"
                   target="_blank"
                   href="https://gaohaoyang.github.io/pte-crx-page/?scrollTo=donation"
                 >
-                  Buy me a Coffee ☕
-                </a>
+                  Sponsor me for a cup of coffee!
+                </a>{' '}
+                ☕
               </div>
             </div>
           </div>
