@@ -44,6 +44,10 @@ Donation methods:
 
 - Github Sponsors
   - https://github.com/sponsors/Gaohaoyang
+
+- <i>Interac</i> e-Transfer
+  - gaohaoyang126@outlook.com
+
 - Paypal
 
   - [PayPal Donation Link](https://www.paypal.com/donate/?business=NB2D3UXSQKDKU&no_recurring=0&item_name=Thanks+for+your+support%21+I+really+appreciate+it.+Have+a+great+day%21&currency_code=CAD)
@@ -57,5 +61,8 @@ Donation methods:
 - AliPay
 
   <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/Alipay.png" width="250"/>
+
+- Buy Me a Coffee
+  - https://buymeacoffee.com/gaohaoyangh
 
 Enjoy it! :smile:
