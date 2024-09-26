@@ -4,6 +4,12 @@ import { PTEDataType } from '../type/PTEDataType'
 import ProgressBar from './ProgressBar'
 import clsx from 'clsx'
 import Draggable from 'react-draggable'
+import {
+  PiBookOpenUser,
+  PiHeadphones,
+  PiPenNib,
+  PiChatsCircle,
+} from 'react-icons/pi'
 
 const ContentUI = () => {
   const [scoresComparison, setScoresComparison] = useState<
@@ -224,7 +230,7 @@ const ContentUI = () => {
               'relative box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-900 shadow-cyan-950/55 transition-all',
               minimize
                 ? 'h-6 w-6 overflow-hidden p-0'
-                : 'h-[576px] max-h-[71vh] w-[554px] p-4',
+                : 'h-[574px] max-h-[71vh] w-[564px] p-4',
               dragging ? 'scale-[1.02] shadow-2xl' : 'scale-100 shadow-md',
             )}
           >
@@ -261,10 +267,30 @@ const ContentUI = () => {
               <thead className="border-b border-slate-400">
                 <tr>
                   <th className="border-r border-slate-400"></th>
-                  <th className="px-2">Listening</th>
-                  <th className="px-2">Reading</th>
-                  <th className="px-2">Speaking</th>
-                  <th className="px-2">Writing</th>
+                  <th className="px-2">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="text-xs">Listening</div>
+                      <PiHeadphones className="text-slate-600" />
+                    </div>
+                  </th>
+                  <th className="px-2">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="text-xs">Reading</div>
+                      <PiBookOpenUser className="text-slate-600" />
+                    </div>
+                  </th>
+                  <th className="px-2">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="text-xs">Speaking</div>
+                      <PiChatsCircle className="text-slate-600" />
+                    </div>
+                  </th>
+                  <th className="px-2">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="text-xs">Writing</div>
+                      <PiPenNib className="text-slate-600" />
+                    </div>
+                  </th>
                   <th className="border-l border-slate-400 px-2">Total</th>
                 </tr>
               </thead>
@@ -334,9 +360,8 @@ const ContentUI = () => {
                 <div key={skill.key} className="mb-3">
                   <div className="flex items-center justify-between">
                     <div className="text-xs text-slate-700">{skill.name}</div>
-                    <div className="mb-[1px] ml-4 flex items-center justify-end">
+                    <div className="ml-1 flex items-center justify-end">
                       <div className="">{skill.skills.join(', ')}</div>
-                      {/* <div className="">{skill.support.join(', ')}</div> */}
                       <div
                         className={clsx(
                           'ml-2 font-bold',
@@ -349,14 +374,32 @@ const ContentUI = () => {
                       >
                         {skill.score}
                       </div>
+                      <div className="flex w-8 items-center justify-end">
+                        {skill.support.map((support) => {
+                          switch (support) {
+                            case 'Listening':
+                              return <PiHeadphones className="text-slate-600" />
+                            case 'Reading':
+                              return (
+                                <PiBookOpenUser className="text-slate-600" />
+                              )
+                            case 'Speaking':
+                              return (
+                                <PiChatsCircle className="text-slate-600" />
+                              )
+                            case 'Writing':
+                              return <PiPenNib className="text-slate-600" />
+                          }
+                        })}
+                      </div>
                     </div>
                   </div>
                   <ProgressBar progress={skill.score} />
                 </div>
               ))}
-              <div className="text-right">
+              <div className="text-right text-xs">
                 <a
-                  className="w-full text-xs font-semibold text-sky-700 !no-underline opacity-10 transition-opacity hover:opacity-100"
+                  className="w-full font-semibold italic text-sky-700 !no-underline opacity-10 transition-opacity hover:opacity-100"
                   target="_blank"
                   href="https://gaohaoyang.github.io/pte-crx-page/?scrollTo=donation"
                 >
