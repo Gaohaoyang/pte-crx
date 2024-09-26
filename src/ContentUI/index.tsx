@@ -22,7 +22,13 @@ const ContentUI = () => {
     }[]
   >([])
   const [skillsProfile, setSkillsProfile] = useState<
-    Array<{ key: string; name: string; score: number; skills: string[] }>
+    Array<{
+      key: string
+      name: string
+      score: number
+      skills: string[]
+      support: Array<'Listening' | 'Reading' | 'Speaking' | 'Writing'>
+    }>
   >([])
   const [minimize, setMinimize] = useState(true)
   const [showContent, setShowContent] = useState(false)
@@ -154,11 +160,12 @@ const ContentUI = () => {
       name: string
       score: number
       skills: string[]
+      support: Array<'Listening' | 'Reading' | 'Speaking' | 'Writing'>
     }> = []
     for (const key in pteData.skillsProfile) {
       if (Object.prototype.hasOwnProperty.call(pteData.skillsProfile, key)) {
-        // @ts-expect-error this is a number
-        const element: number = pteData.skillsProfile[key]
+        const element: number =
+          pteData.skillsProfile[key as keyof typeof pteData.skillsProfile]
         let showName = key
         if (key === 'openResponseSpeakingWriting') {
           showName = 'Open Response Speaking and Writing'
@@ -182,8 +189,9 @@ const ContentUI = () => {
           key,
           name: showName,
           score: element,
-          // @ts-expect-error err
-          skills: skillsAnalysis[key],
+          skills: skillsAnalysis[key as keyof typeof skillsAnalysis].component,
+          support: skillsAnalysis[key as keyof typeof skillsAnalysis]
+            .support as Array<'Listening' | 'Reading' | 'Speaking' | 'Writing'>,
         })
       }
     }
@@ -325,9 +333,10 @@ const ContentUI = () => {
               {skillsProfile.map((skill) => (
                 <div key={skill.key} className="mb-3">
                   <div className="flex items-center justify-between">
-                    <div className="text-slate-700">{skill.name}</div>
+                    <div className="text-xs text-slate-700">{skill.name}</div>
                     <div className="mb-[1px] ml-4 flex items-center justify-end">
                       <div className="">{skill.skills.join(', ')}</div>
+                      {/* <div className="">{skill.support.join(', ')}</div> */}
                       <div
                         className={clsx(
                           'ml-2 font-bold',
@@ -347,11 +356,11 @@ const ContentUI = () => {
               ))}
               <div className="text-right">
                 <a
-                  className="w-full text-sm font-semibold text-sky-700 !no-underline opacity-10 transition-opacity hover:opacity-100"
+                  className="w-full text-xs font-semibold text-sky-700 !no-underline opacity-10 transition-opacity hover:opacity-100"
                   target="_blank"
                   href="https://gaohaoyang.github.io/pte-crx-page/?scrollTo=donation"
                 >
-                  Sponsor me for a cup of coffee!
+                  Developed by HyG. Buy me a coffee!
                 </a>{' '}
                 ☕
               </div>

@@ -157,12 +157,24 @@ const HIW = 'HIW'
 const WFD = 'WFD'
 
 export const skillsAnalysis = {
-  openResponseSpeakingWriting: [WE, DI, RTS],
-  reproducingSpokenWrittenLanguage: [WFD, RA, RS, SST],
-  writingExtended: [WE, SST, SWT],
-  writingShort: [WFD, FIBRW, FIBL],
-  speakingExtended: [DI, RTS],
-  speakingShort: [RA, RS, ASQ],
-  multipleSkillsComprehension: [FIBRW, SST, WFD, RA, RS, SWT, HIW],
-  singleSkillComprehension: [RO, FIBR, MCMRW, MCSR, MCML, MCSL, SMW],
+  openResponseSpeakingWriting: {
+    component: [WE, DI, RTS],
+    support: ['Speaking', 'Writing'],
+  },
+  reproducingSpokenWrittenLanguage: {
+    component: [WFD, RA, RS, SST],
+    support: ['Speaking', 'Writing'],
+  },
+  writingExtended: { component: [WE, SST, SWT], support: ['Writing'] },
+  writingShort: { component: [WFD, FIBRW, FIBL], support: ['Writing'] },
+  speakingExtended: { component: [DI, RTS], support: ['Speaking'] },
+  speakingShort: { component: [RA, RS, ASQ], support: ['Speaking'] },
+  multipleSkillsComprehension: {
+    component: [FIBRW, SST, WFD, RA, RS, SWT, HIW],
+    support: ['Listening', 'Reading'],
+  },
+  singleSkillComprehension: {
+    component: [RO, FIBR, MCMRW, MCSR, MCML, MCSL, SMW],
+    support: ['Listening', 'Reading'],
+  },
 }
