@@ -10,6 +10,7 @@ import {
   PiPenNib,
   PiChatsCircle,
 } from 'react-icons/pi'
+import { VscGithubInverted } from 'react-icons/vsc'
 
 const ContentUI = () => {
   const [scoresComparison, setScoresComparison] = useState<
@@ -262,7 +263,12 @@ const ContentUI = () => {
                 )}
               </div>
             </strong>
-            <div className="mt-1 text-base font-bold">Score</div>
+            <div className="mt-1 flex items-center justify-between text-base font-bold">
+              Score
+              <a href="https://github.com/Gaohaoyang/pte-crx" target="_blank">
+                <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
+              </a>
+            </div>
             <table className="mt-1 w-full border-collapse border-y-2 border-slate-400 text-center">
               <thead className="border-b border-slate-400">
                 <tr>
