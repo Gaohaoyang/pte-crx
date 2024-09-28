@@ -33,7 +33,7 @@ const ContentUI = () => {
       key: string
       name: string
       score: number
-      skills: string[]
+      skills: string[][]
       support: Array<'Listening' | 'Reading' | 'Speaking' | 'Writing'>
     }>
   >([])
@@ -166,7 +166,7 @@ const ContentUI = () => {
       key: string
       name: string
       score: number
-      skills: string[]
+      skills: string[][]
       support: Array<'Listening' | 'Reading' | 'Speaking' | 'Writing'>
     }> = []
     for (const key in pteData.skillsProfile) {
@@ -225,13 +225,13 @@ const ContentUI = () => {
           setDragging(false)
         }}
       >
-        <div className="fixed left-10 top-40 z-[9999]">
+        <div className="fixed left-10 top-28 z-[9999]">
           <div
             className={clsx(
               'relative box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-900 shadow-cyan-950/55 transition-all',
               minimize
                 ? 'h-6 w-6 overflow-hidden p-0'
-                : 'h-[574px] max-h-[71vh] w-[564px] p-4',
+                : 'h-[590px] max-h-[81vh] w-[524px] p-4',
               dragging ? 'scale-[1.02] shadow-2xl' : 'scale-100 shadow-md',
             )}
           >
@@ -269,7 +269,7 @@ const ContentUI = () => {
                 <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
               </a>
             </div>
-            <table className="mt-1 w-full border-collapse border-y-2 border-slate-400 text-center">
+            <table className="w-full border-collapse border-y-2 border-slate-400 text-center text-sm">
               <thead className="border-b border-slate-400">
                 <tr>
                   <th className="border-r border-slate-400"></th>
@@ -361,13 +361,19 @@ const ContentUI = () => {
               </tbody>
             </table>
             <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
-            <div className="mt-1">
+            <div className="">
               {skillsProfile.map((skill) => (
                 <div key={skill.key} className="mb-3">
-                  <div className="flex items-center justify-between">
-                    <div className="text-xs text-slate-700">{skill.name}</div>
+                  <div className="flex items-end justify-between">
+                    <div className="text-slate-700">{skill.name}</div>
                     <div className="ml-1 flex items-center justify-end">
-                      <div className="">{skill.skills.join(', ')}</div>
+                      <div className="flex flex-col items-end">
+                        {skill.skills.map((skillGroup, index) => (
+                          <div key={index} className="text-xs">
+                            {skillGroup.join(', ')}
+                          </div>
+                        ))}
+                      </div>
                       <div
                         className={clsx(
                           'ml-2 font-bold',
