@@ -143,7 +143,7 @@ const SWT = 'SWT'
 const WE = 'WE'
 
 const FIBRW = 'FIB-RW'
-const MCMRW = 'MCM-RW'
+const MCMR = 'MCM-R'
 const RO = 'RO'
 const FIBR = 'FIB-R'
 const MCSR = 'MCS-R'
@@ -158,23 +158,29 @@ const WFD = 'WFD'
 
 export const skillsAnalysis = {
   openResponseSpeakingWriting: {
-    component: [WE, DI, RTS],
+    component: [[WE, DI, RTS]],
     support: ['Speaking', 'Writing'],
   },
   reproducingSpokenWrittenLanguage: {
-    component: [WFD, RA, RS, SST],
+    component: [[WFD, RA, RS, SST]],
     support: ['Speaking', 'Writing'],
   },
-  writingExtended: { component: [WE, SST, SWT], support: ['Writing'] },
-  writingShort: { component: [WFD, FIBRW, FIBL], support: ['Writing'] },
-  speakingExtended: { component: [DI, RTS], support: ['Speaking'] },
-  speakingShort: { component: [RA, RS, ASQ], support: ['Speaking'] },
+  writingExtended: { component: [[WE, SST, SWT]], support: ['Writing'] },
+  writingShort: { component: [[WFD, FIBRW, FIBL]], support: ['Writing'] },
+  speakingExtended: { component: [[DI, RTS]], support: ['Speaking'] },
+  speakingShort: { component: [[RA, RS, ASQ]], support: ['Speaking'] },
   multipleSkillsComprehension: {
-    component: [FIBRW, SST, WFD, RA, RS, SWT, HIW],
+    component: [
+      [WFD, RS, SST, FIBL, HIW, ASQ],
+      [RA, FIBRW, SWT],
+    ],
     support: ['Listening', 'Reading'],
   },
   singleSkillComprehension: {
-    component: [RO, FIBR, MCMRW, MCSR, MCML, MCSL, SMW],
+    component: [
+      [MCML, MCSL, SMW],
+      [FIBR, RO, MCMR, MCSR],
+    ],
     support: ['Listening', 'Reading'],
   },
 }
