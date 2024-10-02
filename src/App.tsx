@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="w-96 bg-slate-50 p-3 text-sm text-slate-800">
       <h1 className="text-center text-lg font-bold">Welcome to use</h1>
-      <h1 className="text-center text-2xl font-bold">PTE Core Sub-Scores</h1>
+      <h1 className="text-center text-2xl font-bold">PTE Sub-Scores</h1>
       <h1 className="text-center text-lg font-bold">Chrome Extension!</h1>
       <ul className="mt-1">
         <li>
@@ -22,7 +22,7 @@ function App() {
           </a>
         </li>
         <li>
-          2. Then you'll see a panel including your sub-scores, CLB levels, etc.
+          2. Then you'll see a panel including your sub-scores.
         </li>
       </ul>
       <div className="mt-2">
@@ -50,7 +50,8 @@ function App() {
         <tbody>
           <tr className="border-b border-slate-400">
             <td className="border-r border-slate-400 py-4">
-              <i>Interac</i> e-Transfer
+              <i>Interac</i> e-Transfer <br/>
+              (Canada)
             </td>
             <td>gaohaoyang126@outlook.com</td>
           </tr>
