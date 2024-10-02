@@ -3,7 +3,7 @@
 Chrome Extension for PTE Sub-Scores Breakdown. Simply visit your PTE score page, and you will see displaying your sub-scores, equivalent IELTS scores, CLB levels, and more.
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/1.png" alt="PTE core sub-scores" width="640"/>
+  <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/screenshot1.png" alt="PTE core sub-scores" width="640"/>
 </p>
 
 Get the full potential of your PTE Sub-Scores! Simply visit your PTE score page, where you’ll find a detailed breakdown of your performance, including your sub-scores, CLB levels, and more. Dive into this insightful panel to better understand your strengths and areas for improvement. Take control of your PTE journey today!
@@ -33,7 +33,7 @@ Get the full potential of your PTE Sub-Scores! Simply visit your PTE score page,
   </li>
 </ul>
 
-![](https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/0.png)
+![](https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/screenshot2.png)
 
 ## Donation
 
