@@ -1,26 +1,27 @@
-# PTE Core Sub-Scores
+# PTE Sub-Scores Breakdown
 
-Chrome Extension for PTE Core Sub-Scores. Visit your PTE score page, then you will see a panel including your sub-scores, CLB levels, etc.
+Chrome Extension for PTE Sub-Scores Breakdown. Simply visit your PTE score page, and you will see displaying your sub-scores, equivalent IELTS scores, CLB levels, and more.
 
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/Gaohaoyang/pics/pte/1.png" alt="PTE core sub-scores" width="640"/>
 </p>
 
-Get the full potential of your PTE Core Sub-Scores! Simply visit your PTE score page, where you’ll find a detailed breakdown of your performance, including your sub-scores, CLB levels, and more. Dive into this insightful panel to better understand your strengths and areas for improvement. Take control of your PTE journey today!
+Get the full potential of your PTE Sub-Scores! Simply visit your PTE score page, where you’ll find a detailed breakdown of your performance, including your sub-scores, CLB levels, and more. Dive into this insightful panel to better understand your strengths and areas for improvement. Take control of your PTE journey today!
 
 ## Features
 
-- **PTE Core Sub-Scores**
-- **PTE Core Sub-Scores Breakdown**
-- **CLB Levels**
-- **Equivalent to IELTS (G) Score**
-- **Points for EE** (With or Without Spouse, or As a Spouse)
+- **PTE Scores and Sub-Scores**
+- **PTE Sub-Scores Breakdown**
+- **Support PTE Academic and PTE Core**
+- **Equivalent to IELTS Score**
+- **CLB Levels (PTE Core)**
+- **Points for EE (PTE Core)** (With or Without Spouse, or As a Spouse)
 - **Draggable Panel**
 
 ## How to use
 
 <ul className="mt-1">
-  <li>1. Install the <a href="https://chromewebstore.google.com/detail/pte-core-sub-scores/hibclclepijigjnfdkmkfhjogfhgicda">PTE Core Sub-Scores Chrome Extension from the Chrome Web Store</a></li>
+  <li>1. Install the <a href="https://chromewebstore.google.com/detail/pte-core-sub-scores/hibclclepijigjnfdkmkfhjogfhgicda">PTE Sub-Scores Chrome Extension from the Chrome Web Store</a></li>
   <li>
     2. Visit your
     <a
