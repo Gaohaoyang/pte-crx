@@ -12,13 +12,17 @@ const [major, minor, patch, label = '0'] = version
 export default defineManifest(async (env) => ({
   manifest_version: 3,
   icons: {
-    "16": "images/16.png",
-    "32": "images/32.png",
-    "48": "images/48.png",
-    "128": "images/128.png",
+    '16': 'images/16.png',
+    '32': 'images/32.png',
+    '48': 'images/48.png',
+    '128': 'images/128.png',
   },
-  name: env.mode === 'staging' ? '[INTERNAL] PTE Core Sub-Scores' : 'PTE Core Sub-Scores',
-  description: 'PTE Core Sub-Scores. Visit your PTE score page, then you will see a panel including your sub-scores, CLB levels, etc.',
+  name:
+    env.mode === 'staging'
+      ? '[INTERNAL] PTE Sub-Scores Breakdown'
+      : 'PTE Sub-Scores Breakdown',
+  description:
+    'PTE Sub-Scores Breakdown. Simply visit your PTE score page, and you will see displaying your sub-scores, equivalent IELTS scores, CLB levels, and more.',
   version: `${major}.${minor}.${patch}.${label}`,
   version_name: version,
   action: { default_popup: 'index.html' },
@@ -41,4 +45,4 @@ export default defineManifest(async (env) => ({
       matches: ['https://mypte.pearsonpte.com/*'],
     },
   ],
-}));
+}))
