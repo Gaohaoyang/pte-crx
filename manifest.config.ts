@@ -22,7 +22,7 @@ export default defineManifest(async (env) => ({
       ? '[INTERNAL] PTE Sub-Scores Breakdown'
       : 'PTE Sub-Scores Breakdown',
   description:
-    'PTE Sub-Scores Breakdown. Simply visit your PTE score page, and you will see displaying your sub-scores, equivalent IELTS scores, CLB levels, and more.',
+    'PTE Sub-Scores Breakdown. Visit your PTE score page, and you will see displaying your sub-scores, equivalent IELTS scores and more.',
   version: `${major}.${minor}.${patch}.${label}`,
   version_name: version,
   action: { default_popup: 'index.html' },
