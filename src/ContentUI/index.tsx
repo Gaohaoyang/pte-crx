@@ -12,6 +12,7 @@ import {
 } from 'react-icons/pi'
 import { VscGithubInverted } from 'react-icons/vsc'
 import PTECoreTable from './PTECoreTable'
+import { AppointmentsType } from '../type/AppointmentsType'
 
 const ContentUI = () => {
   const [pteScore, setPteScore] = useState<{
@@ -31,6 +32,8 @@ const ContentUI = () => {
     }>
   >([])
 
+  const [examName, setExamName] = useState<'PTECore' | 'PTEAcademic'>()
+
   const [minimize, setMinimize] = useState(true)
   const [showContent, setShowContent] = useState(false)
 
@@ -48,18 +51,32 @@ const ContentUI = () => {
 
     // receive message from injected script
     window.addEventListener('message', function (e) {
-      // console.log('content script received:', e.data.type, e.data.data);
+      if (!e.data.type.startsWith('xhr')) {
+        return
+      }
+      // console.log('content script received:', e.data.type, e.data.data)
       // console.log(typeof e.data.data);
       try {
         // console.log(JSON.parse(e.data.data));
-        const pteData: PTEDataType = JSON.parse(e.data.data)
-        setShowContent(true)
-        // console.log('JSON', JSON.stringify(pteData));
-        processData(pteData)
+        if (e.data.type === 'xhr-scorereport') {
+          const pteData: PTEDataType = JSON.parse(e.data.data)
+          setShowContent(true)
+          // console.log('JSON', JSON.stringify(pteData));
+          processData(pteData)
+        }
+        if (e.data.type === 'xhr-appointments') {
+          const appointments: AppointmentsType = JSON.parse(e.data.data)
+          console.log('appointments', appointments)
+          if (appointments[0].examName === 'PTE Core') {
+            setExamName('PTECore')
+          } else {
+            setExamName('PTEAcademic')
+          }
+        }
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        // console.log('error', error);
+        console.log('error--->', error)
       }
     })
   }, [])
@@ -181,7 +198,9 @@ const ContentUI = () => {
                 <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
               </a>
             </div>
-            {pteScore && <PTECoreTable pteScore={pteScore} />}
+            {pteScore && examName === 'PTECore' ? (
+              <PTECoreTable pteScore={pteScore} />
+            ) : null}
 
             <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
             <div className="">

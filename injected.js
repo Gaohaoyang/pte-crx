@@ -1,14 +1,14 @@
-(function (xhr) {
-  var XHR = XMLHttpRequest.prototype;
+;(function (xhr) {
+  var XHR = XMLHttpRequest.prototype
 
-  var open = XHR.open;
-  var send = XHR.send;
+  var open = XHR.open
+  var send = XHR.send
 
   XHR.open = function (method, url) {
-    this._method = method;
-    this._url = url;
-    return open.apply(this, arguments);
-  };
+    this._method = method
+    this._url = url
+    return open.apply(this, arguments)
+  }
 
   XHR.send = function (postData) {
     // console.log(
@@ -20,14 +20,30 @@
     // );
     this.addEventListener('load', function () {
       if (
-        this._url.indexOf('https://api.mypte.pearsonpte.com/appointments/api/scorereport/') !== -1 && this._url.indexOf('/skills') === -1
+        this._url.indexOf(
+          'https://api.mypte.pearsonpte.com/appointments/api/scorereport/',
+        ) !== -1 &&
+        this._url.indexOf('/skills') === -1
       ) {
-        window.postMessage({ type: 'xhr', data: this.response }, '*'); // send to content script
+        window.postMessage(
+          { type: 'xhr-scorereport', data: this.response },
+          '*',
+        ) // send to content script
       }
-    });
-    return send.apply(this, arguments);
-  };
-})(XMLHttpRequest);
+      if (
+        this._url.indexOf(
+          'https://api.mypte.pearsonpte.com/appointments/api/appointments',
+        ) !== -1
+      ) {
+        window.postMessage(
+          { type: 'xhr-appointments', data: this.response },
+          '*',
+        ) // send to content script
+      }
+    })
+    return send.apply(this, arguments)
+  }
+})(XMLHttpRequest)
 
 // const { fetch: origFetch } = window;
 // window.fetch = async (...args) => {
