@@ -4,9 +4,9 @@ import {
   PiPenNib,
   PiChatsCircle,
 } from 'react-icons/pi'
-import { getEqualScores, clbEEScore } from '../scoreList'
+import { getEqualScoresOfPTEAcademic } from '../scoreList'
 
-interface PTECoreTableProps {
+interface PTEAcademicTableProps {
   pteScore: {
     listening: number
     reading: number
@@ -15,13 +15,11 @@ interface PTECoreTableProps {
   }
 }
 
-const PTECoreTable = (props: PTECoreTableProps) => {
+const PTEAcademicTable = (props: PTEAcademicTableProps) => {
   const { pteScore } = props
-
   const scoreList: {
     name: 'Listening' | 'Speaking' | 'Reading' | 'Writing'
     score: number
-    clb?: number
     ieltsCore?: number
   }[] = [
     { name: 'Listening', score: pteScore.listening },
@@ -29,20 +27,14 @@ const PTECoreTable = (props: PTECoreTableProps) => {
     { name: 'Speaking', score: pteScore.speaking },
     { name: 'Writing', score: pteScore.writing },
   ]
+
   scoreList.forEach((item) => {
-    const equivalentScore = getEqualScores(String(item.score), item.name)
-    item.clb = equivalentScore?.clb
+    const equivalentScore = getEqualScoresOfPTEAcademic(String(item.score), item.name)
     item.ieltsCore = equivalentScore?.[`ielts${item.name}`]
   })
 
   const scoresComparisonList: {
-    testName:
-      | 'PTE'
-      | 'CLB'
-      | 'IELTS(G)'
-      | 'Points for EE(Without Spouse)'
-      | 'Points for EE(With Spouse)'
-      | 'Points for EE(As Spouse)'
+    testName: 'PTE' | 'IELTS'
     listening?: number
     reading?: number
     speaking?: number
@@ -56,51 +48,11 @@ const PTECoreTable = (props: PTECoreTableProps) => {
       writing: pteScore.writing,
     },
     {
-      testName: 'CLB',
-      listening: scoreList[0].clb,
-      reading: scoreList[1].clb,
-      speaking: scoreList[2].clb,
-      writing: scoreList[3].clb,
-    },
-    {
-      testName: 'IELTS(G)',
+      testName: 'IELTS',
       listening: scoreList[0].ieltsCore,
       reading: scoreList[1].ieltsCore,
       speaking: scoreList[2].ieltsCore,
       writing: scoreList[3].ieltsCore,
-    },
-    {
-      testName: 'Points for EE(Without Spouse)',
-      // @ts-expect-error this is a number
-      listening: clbEEScore[`clb${scoreList[0].clb}`].withoutSpouse,
-      // @ts-expect-error this is a number
-      reading: clbEEScore[`clb${scoreList[1].clb}`].withoutSpouse,
-      // @ts-expect-error this is a number
-      speaking: clbEEScore[`clb${scoreList[2].clb}`].withoutSpouse,
-      // @ts-expect-error this is a number
-      writing: clbEEScore[`clb${scoreList[3].clb}`].withoutSpouse,
-    },
-    {
-      testName: 'Points for EE(With Spouse)',
-      // @ts-expect-error this is a number
-      listening: clbEEScore[`clb${scoreList[0].clb}`].withSpouse,
-      // @ts-expect-error this is a number
-      reading: clbEEScore[`clb${scoreList[1].clb}`].withSpouse,
-      // @ts-expect-error this is a number
-      speaking: clbEEScore[`clb${scoreList[2].clb}`].withSpouse,
-      // @ts-expect-error this is a number
-      writing: clbEEScore[`clb${scoreList[3].clb}`].withSpouse,
-    },
-    {
-      testName: 'Points for EE(As Spouse)',
-      // @ts-expect-error this is a number
-      listening: clbEEScore[`clb${scoreList[0].clb}`].asSpouse,
-      // @ts-expect-error this is a number
-      reading: clbEEScore[`clb${scoreList[1].clb}`].asSpouse,
-      // @ts-expect-error this is a number
-      speaking: clbEEScore[`clb${scoreList[2].clb}`].asSpouse,
-      // @ts-expect-error this is a number
-      writing: clbEEScore[`clb${scoreList[3].clb}`].asSpouse,
     },
   ]
 
@@ -133,7 +85,7 @@ const PTECoreTable = (props: PTECoreTableProps) => {
               <PiPenNib className="text-slate-600" />
             </div>
           </th>
-          <th className="border-l border-slate-400 px-2">Total</th>
+          {/* <th className="border-l border-slate-400 px-2">Total</th> */}
         </tr>
       </thead>
       <tbody className="">
@@ -144,34 +96,13 @@ const PTECoreTable = (props: PTECoreTableProps) => {
           >
             {item.testName === 'PTE' && (
               <td className="border-r border-slate-400 px-2 text-right">
-                Your PTE Core score
+                Your PTE Academic score
               </td>
             )}
 
-            {item.testName === 'CLB' && (
-              <td className="border-r border-slate-400 px-2 text-right">CLB</td>
-            )}
-
-            {item.testName === 'IELTS(G)' && (
+            {item.testName === 'IELTS' && (
               <td className="border-r border-slate-400 px-2 text-right">
-                Equivalent to IELTS(G) score
-              </td>
-            )}
-
-            {item.testName === 'Points for EE(Without Spouse)' && (
-              <td className="border-r border-slate-400 px-2 text-right">
-                Pts for EE (Without Spouse)
-              </td>
-            )}
-
-            {item.testName === 'Points for EE(With Spouse)' && (
-              <td className="border-r border-slate-400 px-2 text-right">
-                Pts for EE (With Spouse)
-              </td>
-            )}
-            {item.testName === 'Points for EE(As Spouse)' && (
-              <td className="border-r border-slate-400 px-2 text-right">
-                Pts for EE (As Spouse)
+                Equivalent to IELTS score
               </td>
             )}
 
@@ -180,7 +111,7 @@ const PTECoreTable = (props: PTECoreTableProps) => {
             <td>{item.speaking}</td>
             <td>{item.writing}</td>
 
-            <td className="border-l border-slate-400">
+            {/* <td className="border-l border-slate-400">
               {item.testName === 'Points for EE(Without Spouse)' ||
               item.testName === 'Points for EE(With Spouse)' ||
               item.testName === 'Points for EE(As Spouse)'
@@ -189,7 +120,7 @@ const PTECoreTable = (props: PTECoreTableProps) => {
                   item.speaking! +
                   item.writing!
                 : ''}
-            </td>
+            </td> */}
           </tr>
         ))}
       </tbody>
@@ -197,4 +128,4 @@ const PTECoreTable = (props: PTECoreTableProps) => {
   )
 }
 
-export default PTECoreTable
+export default PTEAcademicTable

@@ -1,3 +1,4 @@
+// https://www.canada.ca/en/immigration-refugees-citizenship/corporate/publications-manuals/operational-bulletins-manuals/standard-requirements/language-requirements/test-equivalency-charts.html
 export const scoreList = [
   {
     clb: 10,
@@ -78,6 +79,90 @@ export const scoreList = [
   },
 ]
 
+// https://ielts.com.au/australia/about/article-which-ielts-test-convert-ielts-to-pte-test-score
+export const scoreListAcademic = [
+  {
+    pteReading: [84, 90],
+    pteWriting: [90, 90],
+    pteListening: [85, 90],
+    pteSpeaking: [86, 90],
+    ieltsReading: 8.5,
+    ieltsWriting: 8.5,
+    ieltsListening: 8.5,
+    ieltsSpeaking: 8.5,
+  },
+  {
+    pteReading: [78, 83],
+    pteWriting: [89, 89],
+    pteListening: [79, 84],
+    pteSpeaking: [81, 85],
+    ieltsReading: 8.0,
+    ieltsWriting: 8.0,
+    ieltsListening: 8.0,
+    ieltsSpeaking: 8.0,
+  },
+  {
+    pteReading: [74, 77],
+    pteWriting: [88, 88],
+    pteListening: [74, 78],
+    pteSpeaking: [75, 80],
+    ieltsReading: 7.5,
+    ieltsWriting: 7.5,
+    ieltsListening: 7.5,
+    ieltsSpeaking: 7.5,
+  },
+  {
+    pteReading: [68, 73],
+    pteWriting: [82, 87],
+    pteListening: [66, 73],
+    pteSpeaking: [65, 74],
+    ieltsReading: 7.0,
+    ieltsWriting: 7.0,
+    ieltsListening: 7.0,
+    ieltsSpeaking: 7.0,
+  },
+  {
+    pteReading: [61, 67],
+    pteWriting: [74, 81],
+    pteListening: [57, 65],
+    pteSpeaking: [54, 64],
+    ieltsReading: 6.5,
+    ieltsWriting: 6.5,
+    ieltsListening: 6.5,
+    ieltsSpeaking: 6.5,
+  },
+  {
+    pteReading: [54, 60],
+    pteWriting: [62, 73],
+    pteListening: [48, 56],
+    pteSpeaking: [46, 53],
+    ieltsReading: 6.0,
+    ieltsWriting: 6.0,
+    ieltsListening: 6.0,
+    ieltsSpeaking: 6.0,
+  },
+  {
+    pteReading: [48, 53],
+    pteWriting: [51, 61],
+    pteListening: [43, 47],
+    pteSpeaking: [42, 45],
+    ieltsReading: 5.5,
+    ieltsWriting: 5.5,
+    ieltsListening: 5.5,
+    ieltsSpeaking: 5.5,
+  },
+  {
+    pteReading: [43, 47],
+    pteWriting: [43, 50],
+    pteListening: [40, 42],
+    pteSpeaking: [40, 41],
+    ieltsReading: 5,
+    ieltsWriting: 5,
+    ieltsListening: 5,
+    ieltsSpeaking: 5,
+  },
+]
+
 export const clbEEScore = {
   clb10: {
     withoutSpouse: 34,
@@ -116,6 +201,24 @@ export const clbEEScore = {
   },
 }
 
+export const getEqualScoresOfPTEAcademic = (
+  scoreValue: string,
+  type: 'Listening' | 'Speaking' | 'Reading' | 'Writing',
+) => {
+  const scoreValueNum = Number(scoreValue)
+  const resultItem = scoreListAcademic.find((item) => {
+    const pteTypeScore = item[`pte${type}`]
+    if (pteTypeScore.length > 1) {
+      return (
+        scoreValueNum <= pteTypeScore[1] && scoreValueNum >= pteTypeScore[0]
+      )
+    } else {
+      return scoreValueNum === pteTypeScore[0]
+    }
+  })
+  return resultItem
+}
+
 export const getEqualScores = (
   scoreValue: string,
   type: 'Listening' | 'Speaking' | 'Reading' | 'Writing',
@@ -138,6 +241,7 @@ const RA = 'RA'
 const RS = 'RS'
 const DI = 'DI'
 const RTS = 'RTS'
+const RL = 'RL'
 const ASQ = 'ASQ'
 const SWT = 'SWT'
 const WE = 'WE'
@@ -155,6 +259,7 @@ const MCSL = 'MCS-L'
 const SMW = 'SMW'
 const HIW = 'HIW'
 const WFD = 'WFD'
+const HCS = 'HCS'
 
 export const skillsAnalysis = {
   openResponseSpeakingWriting: {
@@ -173,6 +278,38 @@ export const skillsAnalysis = {
     component: [
       [WFD, RS, SST, FIBL, HIW, ASQ],
       [RA, FIBRW, SWT],
+    ],
+    support: ['Listening', 'Reading'],
+  },
+  singleSkillComprehension: {
+    component: [
+      [MCML, MCSL, SMW],
+      [FIBR, RO, MCMR, MCSR],
+    ],
+    support: ['Listening', 'Reading'],
+  },
+}
+
+export const skillsAnalysisAcademic = {
+  openResponseSpeakingWriting: {
+    component: [[WE, DI, RL]],
+    support: ['Speaking', 'Writing'],
+  },
+  reproducingSpokenWrittenLanguage: {
+    component: [
+      [RA, RS, RL],
+      [SST, SWT, WFD, FIBL],
+    ],
+    support: ['Speaking', 'Writing'],
+  },
+  writingExtended: { component: [[WE, SWT, SST]], support: ['Writing'] },
+  writingShort: { component: [[WFD, FIBRW, FIBL]], support: ['Writing'] },
+  speakingExtended: { component: [[DI, RL]], support: ['Speaking'] },
+  speakingShort: { component: [[RA, RS, ASQ]], support: ['Speaking'] },
+  multipleSkillsComprehension: {
+    component: [
+      [WFD, RS, RL, SST, FIBL, HCS, HIW, ASQ],
+      [RA, SWT, FIBRW],
     ],
     support: ['Listening', 'Reading'],
   },

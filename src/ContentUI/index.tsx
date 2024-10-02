@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { skillsAnalysis } from './scoreList'
+import { skillsAnalysis, skillsAnalysisAcademic } from './scoreList'
 import { PTEDataType } from '../type/PTEDataType'
 import ProgressBar from './ProgressBar'
 import clsx from 'clsx'
@@ -13,6 +13,7 @@ import {
 import { VscGithubInverted } from 'react-icons/vsc'
 import PTECoreTable from './PTECoreTable'
 import { AppointmentsType } from '../type/AppointmentsType'
+import PTEAcademicTable from './PTEAcademicTable'
 
 const ContentUI = () => {
   const [pteScore, setPteScore] = useState<{
@@ -32,7 +33,11 @@ const ContentUI = () => {
     }>
   >([])
 
-  const [examName, setExamName] = useState<'PTECore' | 'PTEAcademic'>()
+  const [examName, setExamName] = useState<{
+    originName: string
+    name: 'PTECore' | 'PTEAcademic'
+  }>()
+  const [pteData, setPteData] = useState<PTEDataType>()
 
   const [minimize, setMinimize] = useState(true)
   const [showContent, setShowContent] = useState(false)
@@ -55,22 +60,26 @@ const ContentUI = () => {
         return
       }
       // console.log('content script received:', e.data.type, e.data.data)
-      // console.log(typeof e.data.data);
       try {
-        // console.log(JSON.parse(e.data.data));
         if (e.data.type === 'xhr-scorereport') {
           const pteData: PTEDataType = JSON.parse(e.data.data)
           setShowContent(true)
           // console.log('JSON', JSON.stringify(pteData));
-          processData(pteData)
+          setPteData(pteData)
         }
         if (e.data.type === 'xhr-appointments') {
           const appointments: AppointmentsType = JSON.parse(e.data.data)
           console.log('appointments', appointments)
           if (appointments[0].examName === 'PTE Core') {
-            setExamName('PTECore')
+            setExamName({
+              originName: appointments[0].examName,
+              name: 'PTECore',
+            })
           } else {
-            setExamName('PTEAcademic')
+            setExamName({
+              originName: appointments[0].examName,
+              name: 'PTEAcademic',
+            })
           }
         }
 
@@ -81,7 +90,19 @@ const ContentUI = () => {
     })
   }, [])
 
-  const processData = (pteData: PTEDataType) => {
+  useEffect(() => {
+    if (pteData && examName) {
+      processData(pteData, examName)
+    }
+  }, [pteData, examName])
+
+  const processData = (
+    pteData: PTEDataType,
+    examName: {
+      originName: string
+      name: 'PTECore' | 'PTEAcademic'
+    },
+  ) => {
     setPteScore({
       listening: pteData.communicativeSkills.listening,
       reading: pteData.communicativeSkills.reading,
@@ -125,9 +146,23 @@ const ContentUI = () => {
           key,
           name: showName,
           score: element,
-          skills: skillsAnalysis[key as keyof typeof skillsAnalysis].component,
-          support: skillsAnalysis[key as keyof typeof skillsAnalysis]
-            .support as Array<'Listening' | 'Reading' | 'Speaking' | 'Writing'>,
+          skills:
+            examName.name === 'PTECore'
+              ? skillsAnalysis[key as keyof typeof skillsAnalysis].component
+              : skillsAnalysisAcademic[
+                  key as keyof typeof skillsAnalysisAcademic
+                ].component,
+          support:
+            examName.name === 'PTECore'
+              ? (skillsAnalysis[key as keyof typeof skillsAnalysis]
+                  .support as Array<
+                  'Listening' | 'Reading' | 'Speaking' | 'Writing'
+                >)
+              : (skillsAnalysisAcademic[
+                  key as keyof typeof skillsAnalysisAcademic
+                ].support as Array<
+                  'Listening' | 'Reading' | 'Speaking' | 'Writing'
+                >),
         })
       }
     }
@@ -160,7 +195,7 @@ const ContentUI = () => {
               'relative box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-900 shadow-cyan-950/55 transition-all',
               minimize
                 ? 'h-6 w-6 overflow-hidden p-0'
-                : 'h-[590px] max-h-[81vh] w-[524px] p-4',
+                : 'h-auto max-h-[81vh] w-auto p-4',
               dragging ? 'scale-[1.02] shadow-2xl' : 'scale-100 shadow-md',
             )}
           >
@@ -193,13 +228,16 @@ const ContentUI = () => {
               </div>
             </strong>
             <div className="mt-1 flex items-center justify-between text-base font-bold">
-              Score
+              {examName?.originName} Score
               <a href="https://github.com/Gaohaoyang/pte-crx" target="_blank">
                 <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
               </a>
             </div>
-            {pteScore && examName === 'PTECore' ? (
+            {pteScore && examName?.name === 'PTECore' ? (
               <PTECoreTable pteScore={pteScore} />
+            ) : null}
+            {pteScore && examName?.name === 'PTEAcademic' ? (
+              <PTEAcademicTable pteScore={pteScore} />
             ) : null}
 
             <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
