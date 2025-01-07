@@ -43,9 +43,10 @@ const ContentUI = () => {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    console.log('PTE core Sub-Scores Chrome Extension is working.')
+    console.log('PTE Sub-Scores Breakdown Chrome Extension is working.')
     // console.log('content script start');
     // inject injected script
+    console.log('PTE Sub-Scores Breakdown, start to inject script.')
     const s = document.createElement('script')
     s.src = chrome.runtime.getURL('injected.js')
     s.onload = function () {
@@ -56,13 +57,65 @@ const ContentUI = () => {
 
     // receive message from injected script
     window.addEventListener('message', function (e) {
-      if (!e.data.type.startsWith('xhr')) {
+      if (!e.data?.type?.startsWith('xhr')) {
         return
       }
-      // console.log('content script received:', e.data.type, e.data.data)
+      console.log('PTE Sub-Scores Breakdown, start to receive message.')
       try {
         if (e.data.type === 'xhr-scorereport') {
+          // console.log('PTE Sub-Scores Breakdown, receive scorereport.', e.data.data)
           const pteData: PTEDataType = JSON.parse(e.data.data)
+          // mock data
+          // const pteData = {
+          //   "gender": "M",
+          //   "testDate": "2024-06-25T10:20:22",
+          //   "candidateId": "PTE003136298",
+          //   "appointmentId": "479478067",
+          //   "middleName": null,
+          //   "countryOfResidence": "Canada",
+          //   "reportIssueDate": "2024-06-26T09:56:14.679",
+          //   "testCenter": "Pearson Professional Centres-Toronto (West) ON",
+          //   "testCenterId": "57936",
+          //   "testCenterCountry": "Canada",
+          //   "hasPhoto": true,
+          //   "enablingSkills": null,
+          //   "countryOfCitizenShip": "China",
+          //   "institutionCode": null,
+          //   "institutionName": null,
+          //   "scoreReportNumber": "2fdb2aSGCM",
+          //   "isRevoked": false,
+          //   "revokedStatusChangeDate": "0001-01-01T00:00:00",
+          //   "examSeriesCode": "PTE-E",
+          //   "ukviNumber": null,
+          //   "admissioinId": "VAL_PASS",
+          //   "idNumber": "EA5626771",
+          //   "countryIssuanceId": "CHN",
+          //   "isExpired": false,
+          //   "isNoShow": false,
+          //   "isNDARefused": false,
+          //   "cefrLevel": null,
+          //   "skillsProfile": {
+          //       "openResponseSpeakingWriting": 90,
+          //       "reproducingSpokenWrittenLanguage": 90,
+          //       "writingExtended": 90,
+          //       "writingShort": 90,
+          //       "speakingExtended": 87,
+          //       "speakingShort": 90,
+          //       "multipleSkillsComprehension": 90,
+          //       "singleSkillComprehension": 76
+          //   },
+          //   "firstName": "Haoyang",
+          //   "lastName": "Gao",
+          //   "dateOfBirth": "1991-06-05T05:00:00Z",
+          //   "testValidUntil": "2026-06-25T10:20:22",
+          //   "gseScore": "89",
+          //   "communicativeSkills": {
+          //       "listening": 4,
+          //       "speaking": 9,
+          //       "reading": 21,
+          //       "writing": 31
+          //   }
+          // }
           setShowContent(true)
           // console.log('JSON', JSON.stringify(pteData));
           setPteData(pteData)
@@ -267,20 +320,16 @@ const ContentUI = () => {
                         {skill.score}
                       </div>
                       <div className="flex w-8 items-center justify-end">
-                        {skill.support.map((support) => {
+                        {skill.support.map((support, index) => {
                           switch (support) {
                             case 'Listening':
-                              return <PiHeadphones className="text-slate-600" />
+                              return <PiHeadphones key={`${skill.key}-${index}`} className="text-slate-600" />
                             case 'Reading':
-                              return (
-                                <PiBookOpenUser className="text-slate-600" />
-                              )
+                              return <PiBookOpenUser key={`${skill.key}-${index}`} className="text-slate-600" />
                             case 'Speaking':
-                              return (
-                                <PiChatsCircle className="text-slate-600" />
-                              )
+                              return <PiChatsCircle key={`${skill.key}-${index}`} className="text-slate-600" />
                             case 'Writing':
-                              return <PiPenNib className="text-slate-600" />
+                              return <PiPenNib key={`${skill.key}-${index}`} className="text-slate-600" />
                           }
                         })}
                       </div>

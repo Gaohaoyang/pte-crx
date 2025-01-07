@@ -72,35 +72,35 @@ const PTECoreTable = (props: PTECoreTableProps) => {
     {
       testName: 'Points for EE(Without Spouse)',
       // @ts-expect-error this is a number
-      listening: clbEEScore[`clb${scoreList[0].clb}`].withoutSpouse,
+      listening: scoreList[0].clb ? clbEEScore[`clb${scoreList[0].clb}`]?.withoutSpouse : 0,
       // @ts-expect-error this is a number
-      reading: clbEEScore[`clb${scoreList[1].clb}`].withoutSpouse,
+      reading: scoreList[1].clb ? clbEEScore[`clb${scoreList[1].clb}`]?.withoutSpouse : 0,
       // @ts-expect-error this is a number
-      speaking: clbEEScore[`clb${scoreList[2].clb}`].withoutSpouse,
+      speaking: scoreList[2].clb ? clbEEScore[`clb${scoreList[2].clb}`]?.withoutSpouse : 0,
       // @ts-expect-error this is a number
-      writing: clbEEScore[`clb${scoreList[3].clb}`].withoutSpouse,
+      writing: scoreList[3].clb ? clbEEScore[`clb${scoreList[3].clb}`]?.withoutSpouse : 0,
     },
     {
       testName: 'Points for EE(With Spouse)',
       // @ts-expect-error this is a number
-      listening: clbEEScore[`clb${scoreList[0].clb}`].withSpouse,
+      listening: scoreList[0].clb ? clbEEScore[`clb${scoreList[0].clb}`]?.withSpouse : 0,
       // @ts-expect-error this is a number
-      reading: clbEEScore[`clb${scoreList[1].clb}`].withSpouse,
+      reading: scoreList[1].clb ? clbEEScore[`clb${scoreList[1].clb}`]?.withSpouse : 0,
       // @ts-expect-error this is a number
-      speaking: clbEEScore[`clb${scoreList[2].clb}`].withSpouse,
+      speaking: scoreList[2].clb ? clbEEScore[`clb${scoreList[2].clb}`]?.withSpouse : 0,
       // @ts-expect-error this is a number
-      writing: clbEEScore[`clb${scoreList[3].clb}`].withSpouse,
+      writing: scoreList[3].clb ? clbEEScore[`clb${scoreList[3].clb}`]?.withSpouse : 0,
     },
     {
       testName: 'Points for EE(As Spouse)',
       // @ts-expect-error this is a number
-      listening: clbEEScore[`clb${scoreList[0].clb}`].asSpouse,
+      listening: scoreList[0].clb ? clbEEScore[`clb${scoreList[0].clb}`]?.asSpouse : 0,
       // @ts-expect-error this is a number
-      reading: clbEEScore[`clb${scoreList[1].clb}`].asSpouse,
+      reading: scoreList[1].clb ? clbEEScore[`clb${scoreList[1].clb}`]?.asSpouse : 0,
       // @ts-expect-error this is a number
-      speaking: clbEEScore[`clb${scoreList[2].clb}`].asSpouse,
+      speaking: scoreList[2].clb ? clbEEScore[`clb${scoreList[2].clb}`]?.asSpouse : 0,
       // @ts-expect-error this is a number
-      writing: clbEEScore[`clb${scoreList[3].clb}`].asSpouse,
+      writing: scoreList[3].clb ? clbEEScore[`clb${scoreList[3].clb}`]?.asSpouse : 0,
     },
   ]
 
