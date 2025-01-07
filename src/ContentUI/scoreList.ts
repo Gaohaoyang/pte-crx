@@ -77,6 +77,17 @@ export const scoreList = [
     ieltsListening: 4.5,
     ieltsSpeaking: 4.0,
   },
+  {
+    clb: 3,
+    pteReading: [24, 32],
+    pteWriting: [32, 40],
+    pteListening: [18, 27],
+    pteSpeaking: [34, 41],
+    ieltsReading: 3.5,
+    ieltsWriting: 4.0,
+    ieltsListening: 4.5,
+    ieltsSpeaking: 4.0,
+  },
 ]
 
 // https://ielts.com.au/australia/about/article-which-ielts-test-convert-ielts-to-pte-test-score
@@ -195,6 +206,11 @@ export const clbEEScore = {
     asSpouse: 1,
   },
   clb4: {
+    withoutSpouse: 0,
+    withSpouse: 0,
+    asSpouse: 0,
+  },
+  clb3: {
     withoutSpouse: 0,
     withSpouse: 0,
     asSpouse: 0,
