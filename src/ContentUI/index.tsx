@@ -267,20 +267,16 @@ const ContentUI = () => {
                         {skill.score}
                       </div>
                       <div className="flex w-8 items-center justify-end">
-                        {skill.support.map((support) => {
+                        {skill.support.map((support, index) => {
                           switch (support) {
                             case 'Listening':
-                              return <PiHeadphones className="text-slate-600" />
+                              return <PiHeadphones key={`${skill.key}-${index}`} className="text-slate-600" />
                             case 'Reading':
-                              return (
-                                <PiBookOpenUser className="text-slate-600" />
-                              )
+                              return <PiBookOpenUser key={`${skill.key}-${index}`} className="text-slate-600" />
                             case 'Speaking':
-                              return (
-                                <PiChatsCircle className="text-slate-600" />
-                              )
+                              return <PiChatsCircle key={`${skill.key}-${index}`} className="text-slate-600" />
                             case 'Writing':
-                              return <PiPenNib className="text-slate-600" />
+                              return <PiPenNib key={`${skill.key}-${index}`} className="text-slate-600" />
                           }
                         })}
                       </div>
