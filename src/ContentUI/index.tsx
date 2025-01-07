@@ -63,7 +63,59 @@ const ContentUI = () => {
       console.log('PTE Sub-Scores Breakdown, start to receive message.')
       try {
         if (e.data.type === 'xhr-scorereport') {
+          // console.log('PTE Sub-Scores Breakdown, receive scorereport.', e.data.data)
           const pteData: PTEDataType = JSON.parse(e.data.data)
+          // mock data
+          // const pteData = {
+          //   "gender": "M",
+          //   "testDate": "2024-06-25T10:20:22",
+          //   "candidateId": "PTE003136298",
+          //   "appointmentId": "479478067",
+          //   "middleName": null,
+          //   "countryOfResidence": "Canada",
+          //   "reportIssueDate": "2024-06-26T09:56:14.679",
+          //   "testCenter": "Pearson Professional Centres-Toronto (West) ON",
+          //   "testCenterId": "57936",
+          //   "testCenterCountry": "Canada",
+          //   "hasPhoto": true,
+          //   "enablingSkills": null,
+          //   "countryOfCitizenShip": "China",
+          //   "institutionCode": null,
+          //   "institutionName": null,
+          //   "scoreReportNumber": "2fdb2aSGCM",
+          //   "isRevoked": false,
+          //   "revokedStatusChangeDate": "0001-01-01T00:00:00",
+          //   "examSeriesCode": "PTE-E",
+          //   "ukviNumber": null,
+          //   "admissioinId": "VAL_PASS",
+          //   "idNumber": "EA5626771",
+          //   "countryIssuanceId": "CHN",
+          //   "isExpired": false,
+          //   "isNoShow": false,
+          //   "isNDARefused": false,
+          //   "cefrLevel": null,
+          //   "skillsProfile": {
+          //       "openResponseSpeakingWriting": 90,
+          //       "reproducingSpokenWrittenLanguage": 90,
+          //       "writingExtended": 90,
+          //       "writingShort": 90,
+          //       "speakingExtended": 87,
+          //       "speakingShort": 90,
+          //       "multipleSkillsComprehension": 90,
+          //       "singleSkillComprehension": 76
+          //   },
+          //   "firstName": "Haoyang",
+          //   "lastName": "Gao",
+          //   "dateOfBirth": "1991-06-05T05:00:00Z",
+          //   "testValidUntil": "2026-06-25T10:20:22",
+          //   "gseScore": "89",
+          //   "communicativeSkills": {
+          //       "listening": 4,
+          //       "speaking": 9,
+          //       "reading": 21,
+          //       "writing": 31
+          //   }
+          // }
           setShowContent(true)
           // console.log('JSON', JSON.stringify(pteData));
           setPteData(pteData)
