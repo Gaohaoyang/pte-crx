@@ -43,9 +43,10 @@ const ContentUI = () => {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    console.log('PTE core Sub-Scores Chrome Extension is working.')
+    console.log('PTE Sub-Scores Breakdown Chrome Extension is working.')
     // console.log('content script start');
     // inject injected script
+    console.log('PTE Sub-Scores Breakdown, start to inject script.')
     const s = document.createElement('script')
     s.src = chrome.runtime.getURL('injected.js')
     s.onload = function () {
@@ -59,7 +60,7 @@ const ContentUI = () => {
       if (!e.data?.type?.startsWith('xhr')) {
         return
       }
-      // console.log('content script received:', e.data.type, e.data.data)
+      console.log('PTE Sub-Scores Breakdown, start to receive message.')
       try {
         if (e.data.type === 'xhr-scorereport') {
           const pteData: PTEDataType = JSON.parse(e.data.data)
