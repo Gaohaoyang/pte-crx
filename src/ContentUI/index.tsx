@@ -56,7 +56,7 @@ const ContentUI = () => {
 
     // receive message from injected script
     window.addEventListener('message', function (e) {
-      if (!e.data.type.startsWith('xhr')) {
+      if (!e.data?.type?.startsWith('xhr')) {
         return
       }
       // console.log('content script received:', e.data.type, e.data.data)
