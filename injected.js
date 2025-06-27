@@ -25,18 +25,37 @@
         ) !== -1 &&
         this._url.indexOf('/skills') === -1
       ) {
-        window.postMessage(
-          { type: 'xhr-scorereport', data: this.response },
-          '*',
-        ) // send to content script
+        // console.log('PTESubScore_pteData', this.response)
+        var tempPTEDataStr = JSON.stringify(JSON.parse(this.response))
+        var tempPTEData = JSON.parse(tempPTEDataStr)
+        delete tempPTEData.photoInfo
+        localStorage.setItem(
+          'PTESubScore_pteData',
+          JSON.stringify(tempPTEData),
+        )
+        window.postMessage({ type: 'xhr-scorereport', data: tempPTEData }, '*') // send to content script
       }
       if (
         this._url.indexOf(
           'https://api.mypte.pearsonpte.com/appointments/api/appointments',
         ) !== -1
       ) {
+        // console.log('pteName', this.response)
+        const response = JSON.parse(this.response)
+        var pteName =
+          response[0].examName === 'PTE Core' ? 'PTECore' : 'PTEAcademic';
+        // console.log('pteName', pteName)
+        // console.log('pteName', response[0].examName)
+
+        localStorage.setItem(
+          'PTESubScore_examName',
+          JSON.stringify({
+            name: pteName,
+            originName: response[0].examName,
+          }),
+        )
         window.postMessage(
-          { type: 'xhr-appointments', data: this.response },
+          { type: 'xhr-appointments', data: response },
           '*',
         ) // send to content script
       }

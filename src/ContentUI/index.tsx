@@ -43,86 +43,78 @@ const ContentUI = () => {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    console.log('PTE Sub-Scores Breakdown Chrome Extension is working.')
+    const handleUnload = () => {
+      localStorage.removeItem('PTESubScore_examName')
+      localStorage.removeItem('PTESubScore_pteData')
+    }
+
+    window.addEventListener('beforeunload', handleUnload)
+
+    return () => {
+      window.removeEventListener('beforeunload', handleUnload)
+    }
+  }, [])
+
+  useEffect(() => {
+    // listen url
+    const onPopState = () => {
+      console.log('URL changed to:', window.location.href)
+    }
+
+    window.addEventListener('popstate', onPopState)
+
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  useEffect(() => {
     // console.log('content script start');
     // inject injected script
-    console.log('PTE Sub-Scores Breakdown, start to inject script.')
-    const s = document.createElement('script')
-    s.src = chrome.runtime.getURL('injected.js')
-    s.onload = function () {
-      // @ts-expect-error this is injected script
-      this.remove()
+    // console.log('PTE Sub-Scores Breakdown, start to inject script.')
+    // const s = document.createElement('script')
+    // s.src = chrome.runtime.getURL('injected.js')
+    // s.onload = function () {
+    //   // @ts-expect-error this is injected script
+    //   this.remove()
+    // }
+    // ;(document.head || document.documentElement).appendChild(s)
+
+    if (localStorage.getItem('PTESubScore_pteData')) {
+      setPteData(
+        JSON.parse(localStorage.getItem('PTESubScore_pteData') || '{}'),
+      )
     }
-    ;(document.head || document.documentElement).appendChild(s)
+    if (localStorage.getItem('PTESubScore_examName')) {
+      setExamName(
+        JSON.parse(localStorage.getItem('PTESubScore_examName') || '{}'),
+      )
+    }
 
     // receive message from injected script
     window.addEventListener('message', function (e) {
       if (!e.data?.type?.startsWith('xhr')) {
         return
       }
-      console.log('PTE Sub-Scores Breakdown, start to receive message.')
+      // console.log('PTE Sub-Scores Breakdown, start to receive message.')
+      // console.log(
+      //   'PTE Sub-Scores Breakdown, start to receive message2',
+      //   e.data.data,
+      // )
       try {
         if (e.data.type === 'xhr-scorereport') {
-          // console.log('PTE Sub-Scores Breakdown, receive scorereport.', e.data.data)
-          const pteData: PTEDataType = JSON.parse(e.data.data)
-          // mock data
-          // const pteData = {
-          //   "gender": "M",
-          //   "testDate": "2024-06-25T10:20:22",
-          //   "candidateId": "PTE003136298",
-          //   "appointmentId": "479478067",
-          //   "middleName": null,
-          //   "countryOfResidence": "Canada",
-          //   "reportIssueDate": "2024-06-26T09:56:14.679",
-          //   "testCenter": "Pearson Professional Centres-Toronto (West) ON",
-          //   "testCenterId": "57936",
-          //   "testCenterCountry": "Canada",
-          //   "hasPhoto": true,
-          //   "enablingSkills": null,
-          //   "countryOfCitizenShip": "China",
-          //   "institutionCode": null,
-          //   "institutionName": null,
-          //   "scoreReportNumber": "2fdb2aSGCM",
-          //   "isRevoked": false,
-          //   "revokedStatusChangeDate": "0001-01-01T00:00:00",
-          //   "examSeriesCode": "PTE-E",
-          //   "ukviNumber": null,
-          //   "admissioinId": "VAL_PASS",
-          //   "idNumber": "EA5626771",
-          //   "countryIssuanceId": "CHN",
-          //   "isExpired": false,
-          //   "isNoShow": false,
-          //   "isNDARefused": false,
-          //   "cefrLevel": null,
-          //   "skillsProfile": {
-          //       "openResponseSpeakingWriting": 90,
-          //       "reproducingSpokenWrittenLanguage": 90,
-          //       "writingExtended": 90,
-          //       "writingShort": 90,
-          //       "speakingExtended": 87,
-          //       "speakingShort": 90,
-          //       "multipleSkillsComprehension": 90,
-          //       "singleSkillComprehension": 76
-          //   },
-          //   "firstName": "Haoyang",
-          //   "lastName": "Gao",
-          //   "dateOfBirth": "1991-06-05T05:00:00Z",
-          //   "testValidUntil": "2026-06-25T10:20:22",
-          //   "gseScore": "89",
-          //   "communicativeSkills": {
-          //       "listening": 4,
-          //       "speaking": 9,
-          //       "reading": 21,
-          //       "writing": 31
-          //   }
-          // }
+          console.log(
+            'PTE Sub-Scores Breakdown, receive scorereport.',
+            e.data.data,
+          )
+
+          const pteData: PTEDataType = e.data.data
           setShowContent(true)
           // console.log('JSON', JSON.stringify(pteData));
           setPteData(pteData)
+          // console.log('pteData', pteData)
         }
         if (e.data.type === 'xhr-appointments') {
-          const appointments: AppointmentsType = JSON.parse(e.data.data)
-          console.log('appointments', appointments)
+          const appointments: AppointmentsType = e.data.data
+          // console.log('appointments', appointments)
           if (appointments[0].examName === 'PTE Core') {
             setExamName({
               originName: appointments[0].examName,
@@ -135,7 +127,6 @@ const ContentUI = () => {
             })
           }
         }
-
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         console.log('error--->', error)
@@ -220,6 +211,7 @@ const ContentUI = () => {
       }
     }
     setSkillsProfile(skillsProfile)
+    setShowContent(true)
     setTimeout(() => {
       setMinimize(false)
     }, 80)
@@ -282,9 +274,14 @@ const ContentUI = () => {
             </strong>
             <div className="mt-1 flex items-center justify-between text-base font-bold">
               {examName?.originName} Score
-              <a href="https://github.com/Gaohaoyang/pte-crx" target="_blank">
-                <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
-              </a>
+              <div className="flex items-center">
+                <div className="mr-2 text-xs">
+                  Test Date: {pteData?.testDate.substring(0, 10).replace(/-/g, '/')}
+                </div>
+                <a href="https://github.com/Gaohaoyang/pte-crx" target="_blank">
+                  <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
+                </a>
+              </div>
             </div>
             {pteScore && examName?.name === 'PTECore' ? (
               <PTECoreTable pteScore={pteScore} />
@@ -323,13 +320,33 @@ const ContentUI = () => {
                         {skill.support.map((support, index) => {
                           switch (support) {
                             case 'Listening':
-                              return <PiHeadphones key={`${skill.key}-${index}`} className="text-slate-600" />
+                              return (
+                                <PiHeadphones
+                                  key={`${skill.key}-${index}`}
+                                  className="text-slate-600"
+                                />
+                              )
                             case 'Reading':
-                              return <PiBookOpenUser key={`${skill.key}-${index}`} className="text-slate-600" />
+                              return (
+                                <PiBookOpenUser
+                                  key={`${skill.key}-${index}`}
+                                  className="text-slate-600"
+                                />
+                              )
                             case 'Speaking':
-                              return <PiChatsCircle key={`${skill.key}-${index}`} className="text-slate-600" />
+                              return (
+                                <PiChatsCircle
+                                  key={`${skill.key}-${index}`}
+                                  className="text-slate-600"
+                                />
+                              )
                             case 'Writing':
-                              return <PiPenNib key={`${skill.key}-${index}`} className="text-slate-600" />
+                              return (
+                                <PiPenNib
+                                  key={`${skill.key}-${index}`}
+                                  className="text-slate-600"
+                                />
+                              )
                           }
                         })}
                       </div>
