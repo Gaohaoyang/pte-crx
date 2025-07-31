@@ -47,6 +47,9 @@ jobs:
       - run: pnpm run build
         if: steps.check.outputs.changed == 'true'
 
+      - run: rm -rf dist/.vite
+        if: steps.check.outputs.changed == 'true'
+
       - name: zip
         if: steps.check.outputs.changed == 'true'
         uses: montudor/action-zip@v1
