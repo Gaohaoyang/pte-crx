@@ -62,3 +62,12 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
+
+      - name: Upload & release Edge
+        if: steps.check.outputs.changed == 'true'
+        uses: wdzeng/edge-addon@v2
+        with:
+          product-id: 84da9219-5205-4a1a-8daf-84e6f82b3eda
+          zip-path: dist.zip
+          api-key: ${{ secrets.EDGE_API_KEY }}
+          client-id: ${{ secrets.EDGE_CLIENT_ID }}

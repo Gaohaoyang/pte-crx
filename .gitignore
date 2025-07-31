@@ -25,3 +25,6 @@ dist.zip
 *.njsproj
 *.sln
 *.sw?
+
+tsconfig.app.tsbuildinfo
+tsconfig.node.tsbuildinfo
