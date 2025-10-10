@@ -42,8 +42,9 @@
       ) {
         // console.log('pteName', this.response)
         const response = JSON.parse(this.response)
+        // response[0].examName = 'PTEAcademic' // test
         var pteName =
-          response[0].examName === 'PTE Core' ? 'PTECore' : 'PTEAcademic';
+          response[0].examName === 'PTE Core' ? 'PTECore' : 'PTEAcademic'
         // console.log('pteName', pteName)
         // console.log('pteName', response[0].examName)
 
@@ -54,10 +55,7 @@
             originName: response[0].examName,
           }),
         )
-        window.postMessage(
-          { type: 'xhr-appointments', data: response },
-          '*',
-        ) // send to content script
+        window.postMessage({ type: 'xhr-appointments', data: response }, '*') // send to content script
       }
     })
     return send.apply(this, arguments)
