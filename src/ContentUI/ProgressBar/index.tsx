@@ -3,15 +3,16 @@ import { useEffect, useState } from 'react'
 type Props = {
   progress: number
   total?: number
+  delay?: number
 }
 const ProgressBar = (props: Props) => {
-  const { progress, total = 90 } = props
+  const { progress, total = 90, delay = 0 } = props
   const [progressInner, setProgressInner] = useState(0)
   useEffect(() => {
     setTimeout(() => {
       setProgressInner(progress)
-    }, 500)
-  }, [progress])
+    }, 500 + delay)
+  }, [progress, delay])
   return (
     <div className="h-1 w-full rounded-full bg-slate-300 relative overflow-hidden">
       <div

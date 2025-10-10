@@ -292,7 +292,7 @@ const ContentUI = () => {
 
             <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
             <div className="">
-              {skillsProfile.map((skill) => (
+              {skillsProfile.map((skill, index) => (
                 <div key={skill.key} className="mb-3">
                   <div className="flex items-end justify-between">
                     <div className="text-slate-700">{skill.name}</div>
@@ -352,7 +352,7 @@ const ContentUI = () => {
                       </div>
                     </div>
                   </div>
-                  <ProgressBar progress={skill.score} />
+                  <ProgressBar progress={skill.score} delay={index * 100} />
                 </div>
               ))}
               <div className="text-right text-xs">
