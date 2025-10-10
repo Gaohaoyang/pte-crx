@@ -281,6 +281,7 @@ const RL = 'RL'
 const ASQ = 'ASQ'
 const SWT = 'SWT'
 const WE = 'WE'
+const SGD = 'SGD'
 
 const FIBRW = 'FIB-RW'
 const MCMR = 'MCM-R'
@@ -328,23 +329,23 @@ export const skillsAnalysis = {
 
 export const skillsAnalysisAcademic = {
   openResponseSpeakingWriting: {
-    component: [[WE, DI, RL]],
-    support: ['Speaking', 'Writing'],
-  },
-  reproducingSpokenWrittenLanguage: {
     component: [
-      [RA, RS, RL],
-      [SST, SWT, WFD, FIBL],
+      [DI, RL, SGD, RTS],
+      [WE, SWT, SST],
     ],
     support: ['Speaking', 'Writing'],
   },
+  reproducingSpokenWrittenLanguage: {
+    component: [[RA, RS], [WFD]],
+    support: ['Speaking', 'Writing'],
+  },
   writingExtended: { component: [[WE, SWT, SST]], support: ['Writing'] },
-  writingShort: { component: [[WFD, FIBRW, FIBL]], support: ['Writing'] },
-  speakingExtended: { component: [[DI, RL]], support: ['Speaking'] },
+  writingShort: { component: [[WFD]], support: ['Writing'] },
+  speakingExtended: { component: [[DI, RL, SGD, RTS]], support: ['Speaking'] },
   speakingShort: { component: [[RA, RS, ASQ]], support: ['Speaking'] },
   multipleSkillsComprehension: {
     component: [
-      [WFD, RS, RL, SST, FIBL, HCS, HIW, ASQ],
+      [WFD, RS, RL, SST, SGD, FIBL, HCS, HIW, ASQ],
       [RA, SWT, FIBRW],
     ],
     support: ['Listening', 'Reading'],
