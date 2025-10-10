@@ -15,6 +15,48 @@ import PTECoreTable from './PTECoreTable'
 import { AppointmentsType } from '../type/AppointmentsType'
 import PTEAcademicTable from './PTEAcademicTable'
 
+const useCountAnimation = (targetValue: number, duration = 1000, delay = 0) => {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const startTime = Date.now() + delay
+    const endValue = targetValue
+
+    const animate = () => {
+      const now = Date.now()
+      if (now < startTime) {
+        requestAnimationFrame(animate)
+        return
+      }
+
+      const progress = Math.min((now - startTime) / duration, 1)
+      const currentCount = Math.floor(progress * endValue)
+
+      setCount(currentCount)
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+
+    const rafId = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafId)
+  }, [targetValue, duration, delay])
+
+  return count
+}
+
+const AnimatedScore = ({
+  score,
+  delay,
+}: {
+  score: number
+  delay: number
+}) => {
+  const animatedScore = useCountAnimation(score, 1000, delay)
+  return <>{animatedScore}</>
+}
+
 const ContentUI = () => {
   const [pteScore, setPteScore] = useState<{
     listening: number
@@ -127,7 +169,6 @@ const ContentUI = () => {
             })
           }
         }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         console.log('error--->', error)
       }
@@ -306,7 +347,7 @@ const ContentUI = () => {
                       </div>
                       <div
                         className={clsx(
-                          'ml-2 font-bold',
+                          'ml-2 font-bold w-5',
                           skill.score < 80
                             ? skill.score < 60
                               ? 'text-red-700'
@@ -314,7 +355,7 @@ const ContentUI = () => {
                             : 'text-green-700',
                         )}
                       >
-                        {skill.score}
+                        <AnimatedScore score={skill.score} delay={index * 100} />
                       </div>
                       <div className="flex w-8 items-center justify-end">
                         {skill.support.map((support, index) => {
