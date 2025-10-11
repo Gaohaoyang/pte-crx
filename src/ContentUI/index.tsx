@@ -433,12 +433,30 @@ const ContentUI = () => {
                 <div className="mt-2">PTE-Core 一站式练习网站</div>
                 <div className="">All-in-one practice website</div>
                 <div className="">只要开始，就有收获！Just start!</div>
-                <div className="mt-2 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 py-1 text-white hover:from-blue-600 hover:to-cyan-600 transition-all">
+                <div className="mt-2 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 py-1 text-white transition-all hover:from-blue-600 hover:to-cyan-600">
                   开始练习 Start practicing
                 </div>
-                {/* <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white">
-              复制成绩
-            </div> */}
+                {/* <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white" onClick={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                  console.log('复制成绩')
+                  console.log(pteData)
+                  const clipboardData = {
+                    gseScore: pteData?.gseScore,
+                    communicativeSkills: pteData?.communicativeSkills,
+                    skillsProfile: pteData?.skillsProfile,
+                    testDate: pteData?.testDate,
+                    testCenter: pteData?.testCenter,
+                    testCenterId: pteData?.testCenterId,
+                    testCenterCountry: pteData?.testCenterCountry,
+                    // firstName: pteData?.firstName,
+                    // lastName: pteData?.lastName,
+                  }
+                  console.log(clipboardData)
+                  navigator.clipboard.writeText(JSON.stringify(clipboardData))
+                }}>
+                  复制成绩
+                </div> */}
               </a>
             </div>
           )}
