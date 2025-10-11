@@ -16,7 +16,7 @@ const ProgressBar = (props: Props) => {
   return (
     <div className="h-1 w-full rounded-full bg-slate-300 relative overflow-hidden">
       <div
-        className="duration-700 ease-out absolute -left-full top-0 h-1 w-full rounded-full bg-cyan-600 transition-transform"
+        className="duration-700 ease-out absolute -left-full top-0 h-1 w-full rounded-full bg-gradient-to-r from-cyan-400 via-cyan-600 to-blue-400 transition-transform shadow-[0_0_10px_rgba(8,145,178,0.5)]"
         style={{ transform: `translateX(${(progressInner / total) * 100}%)` }}
       ></div>
     </div>
