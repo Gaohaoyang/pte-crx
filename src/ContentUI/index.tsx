@@ -323,7 +323,9 @@ const ContentUI = () => {
               <PTECoreTable pteScore={pteScore} />
             ) : null}
             {pteScore && examName?.name === 'PTEAcademic' ? (
-              <PTEAcademicTable pteScore={{...pteScore, overall: Number(pteData?.gseScore)}} />
+              <PTEAcademicTable
+                pteScore={{ ...pteScore, overall: Number(pteData?.gseScore) }}
+              />
             ) : null}
 
             <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
@@ -409,7 +411,7 @@ const ContentUI = () => {
           {examName?.name === 'PTECore' && (
             <div
               className={clsx(
-                'absolute left-full top-0 ml-6 box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-900 shadow-cyan-950/55 transition-all',
+                'absolute left-full top-0 ml-6 box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-800 shadow-cyan-950/55 transition-all',
                 minimize
                   ? 'h-0 w-0 overflow-hidden p-0 opacity-0'
                   : 'h-auto max-h-[81vh] w-auto p-2 opacity-100',
@@ -417,7 +419,7 @@ const ContentUI = () => {
               )}
             >
               <a
-                className="relative block w-[220px] rounded-xl border p-2 transition-all hover:border-cyan-500 hover:no-underline"
+                className="relative block w-[220px] rounded-xl border p-2 text-slate-800 transition-all hover:border-cyan-500 hover:no-underline"
                 href="https://ynwac.com/register?code=HYG"
                 target="_blank"
               >
@@ -433,7 +435,7 @@ const ContentUI = () => {
                 <div className="mt-2">PTE-Core 一站式练习网站</div>
                 <div className="">All-in-one practice website</div>
                 <div className="">只要开始，就有收获！Just start!</div>
-                <div className="mt-2 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 py-1 text-white transition-all hover:from-blue-600 hover:to-cyan-600">
+                <div className="mt-2 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500/90 to-cyan-500/90 py-1 text-white transition-all hover:from-blue-600 hover:to-cyan-600">
                   开始练习 Start practicing
                 </div>
                 {/* <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white" onClick={(e) => {
