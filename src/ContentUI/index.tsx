@@ -46,13 +46,7 @@ const useCountAnimation = (targetValue: number, duration = 1000, delay = 0) => {
   return count
 }
 
-const AnimatedScore = ({
-  score,
-  delay,
-}: {
-  score: number
-  delay: number
-}) => {
+const AnimatedScore = ({ score, delay }: { score: number; delay: number }) => {
   const animatedScore = useCountAnimation(score, 1000, delay)
   return <>{animatedScore}</>
 }
@@ -317,7 +311,8 @@ const ContentUI = () => {
               {examName?.originName} Score
               <div className="flex items-center">
                 <div className="mr-2 text-xs">
-                  Test Date: {pteData?.testDate.substring(0, 10).replace(/-/g, '/')}
+                  Test Date:{' '}
+                  {pteData?.testDate.substring(0, 10).replace(/-/g, '/')}
                 </div>
                 <a href="https://github.com/Gaohaoyang/pte-crx" target="_blank">
                   <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
@@ -347,7 +342,7 @@ const ContentUI = () => {
                       </div>
                       <div
                         className={clsx(
-                          'ml-2 font-bold w-5',
+                          'ml-2 w-5 font-bold',
                           skill.score < 80
                             ? skill.score < 60
                               ? 'text-red-700'
@@ -355,7 +350,10 @@ const ContentUI = () => {
                             : 'text-green-700',
                         )}
                       >
-                        <AnimatedScore score={skill.score} delay={index * 100} />
+                        <AnimatedScore
+                          score={skill.score}
+                          delay={index * 100}
+                        />
                       </div>
                       <div className="flex w-8 items-center justify-end">
                         {skill.support.map((support, index) => {
@@ -408,6 +406,42 @@ const ContentUI = () => {
               </div>
             </div>
           </div>
+          {examName?.name === 'PTECore' && (
+            <div
+              className={clsx(
+                'absolute left-full top-0 ml-6 box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-900 shadow-cyan-950/55 transition-all',
+                minimize
+                  ? 'h-0 w-0 overflow-hidden p-0 opacity-0'
+                  : 'h-auto max-h-[81vh] w-auto p-2 opacity-100',
+                dragging ? 'scale-[1.02] shadow-xl' : 'scale-100 shadow-md',
+              )}
+            >
+              <a
+                className="relative block w-[220px] rounded-xl border p-2 transition-all hover:border-cyan-500 hover:no-underline"
+                href="https://ynwac.com/register?code=HYG"
+                target="_blank"
+              >
+                <div className="absolute right-2 top-2 rounded-lg border bg-white/80 px-2 py-0.5 text-xs">
+                  Ad
+                </div>
+                <span className="relative text-xl tracking-wide text-gray-900">
+                  <span className="bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text font-sans font-black text-transparent">
+                    YNWAC
+                  </span>
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-blue-500 to-green-400 font-black"></span>
+                </span>
+                <div className="mt-2">PTE-Core 一站式练习网站</div>
+                <div className="">All-in-one practice website</div>
+                <div className="">只要开始，就有收获！Just start!</div>
+                <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-600 py-1 text-white hover:bg-cyan-700">
+                  开始练习 Start practicing
+                </div>
+                {/* <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white">
+              复制成绩
+            </div> */}
+              </a>
+            </div>
+          )}
         </div>
       </Draggable>
     </>
