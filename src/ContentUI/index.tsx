@@ -323,7 +323,7 @@ const ContentUI = () => {
               <PTECoreTable pteScore={pteScore} />
             ) : null}
             {pteScore && examName?.name === 'PTEAcademic' ? (
-              <PTEAcademicTable pteScore={pteScore} />
+              <PTEAcademicTable pteScore={{...pteScore, overall: Number(pteData?.gseScore)}} />
             ) : null}
 
             <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
