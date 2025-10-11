@@ -433,7 +433,7 @@ const ContentUI = () => {
                 <div className="mt-2">PTE-Core 一站式练习网站</div>
                 <div className="">All-in-one practice website</div>
                 <div className="">只要开始，就有收获！Just start!</div>
-                <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-600 py-1 text-white hover:bg-cyan-700">
+                <div className="mt-2 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 py-1 text-white hover:from-blue-600 hover:to-cyan-600 transition-all">
                   开始练习 Start practicing
                 </div>
                 {/* <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white">
