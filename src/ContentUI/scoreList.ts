@@ -90,107 +90,125 @@ export const scoreList = [
   },
 ]
 
-// https://ielts.com.au/australia/about/article-which-ielts-test-convert-ielts-to-pte-test-score
+// https://www.pearsonpte.com/ctf-assets/yqwtwibiobs4/3TQDBW61bfUHn8XJJAXm8v/ef900ec4e82f2043248e485bd4e3b15d/PTE_Academic_Test_Taker_Score_Guide.pdf
 export const scoreListAcademic = [
   {
-    pteReading: [90, 90],
-    pteWriting: [90, 90],
-    pteListening: [90, 90],
-    pteSpeaking: [90, 90],
+    pteReading: [81, 90],
+    pteListening: [81, 90],
+    pteOverall: [90, 90],
     ieltsReading: 9.0,
     ieltsWriting: 9.0,
     ieltsListening: 9.0,
     ieltsSpeaking: 9.0,
+    ieltsOverall: 9.0,
   },
   {
-    pteReading: [89, 90],
-    pteWriting: [89, 90],
-    pteListening: [89, 90],
-    pteSpeaking: [89, 90],
+    pteReading: [75, 80],
+    pteWriting: [90, 90],
+    pteListening: [75, 80],
+    pteSpeaking: [90, 90],
+    pteOverall: [86, 89],
     ieltsReading: 8.5,
     ieltsWriting: 8.5,
     ieltsListening: 8.5,
     ieltsSpeaking: 8.5,
+    ieltsOverall: 8.5,
   },
   {
-    pteReading: [84, 88],
-    pteWriting: [84, 88],
-    pteListening: [84, 88],
-    pteSpeaking: [84, 88],
+    pteReading: [70, 74],
+    pteWriting: [85, 89],
+    pteListening: [69, 74],
+    pteSpeaking: [88, 89],
+    pteOverall: [79, 85],
     ieltsReading: 8.0,
     ieltsWriting: 8.0,
     ieltsListening: 8.0,
     ieltsSpeaking: 8.0,
+    ieltsOverall: 8.0,
   },
   {
-    pteReading: [76, 83],
-    pteWriting: [76, 83],
-    pteListening: [76, 83],
-    pteSpeaking: [76, 83],
+    pteReading: [65, 69],
+    pteWriting: [77, 84],
+    pteListening: [64, 68],
+    pteSpeaking: [83, 87],
+    pteOverall: [71, 78],
     ieltsReading: 7.5,
     ieltsWriting: 7.5,
     ieltsListening: 7.5,
     ieltsSpeaking: 7.5,
+    ieltsOverall: 7.5,
   },
   {
-    pteReading: [66, 75],
-    pteWriting: [66, 75],
-    pteListening: [66, 75],
-    pteSpeaking: [66, 75],
+    pteReading: [59, 64],
+    pteWriting: [69, 76],
+    pteListening: [58, 63],
+    pteSpeaking: [76, 82],
+    pteOverall: [63, 70],
     ieltsReading: 7.0,
     ieltsWriting: 7.0,
     ieltsListening: 7.0,
     ieltsSpeaking: 7.0,
+    ieltsOverall: 7.0,
   },
   {
-    pteReading: [56, 65],
-    pteWriting: [56, 65],
-    pteListening: [56, 65],
-    pteSpeaking: [56, 65],
+    pteReading: [54, 58],
+    pteWriting: [60, 68],
+    pteListening: [53, 57],
+    pteSpeaking: [66, 75],
+    pteOverall: [55, 62],
     ieltsReading: 6.5,
     ieltsWriting: 6.5,
     ieltsListening: 6.5,
     ieltsSpeaking: 6.5,
+    ieltsOverall: 6.5,
   },
   {
-    pteReading: [46, 55],
-    pteWriting: [46, 55],
-    pteListening: [46, 55],
-    pteSpeaking: [46, 55],
+    pteReading: [48, 53],
+    pteWriting: [51, 59],
+    pteListening: [47, 52],
+    pteSpeaking: [54, 65],
+    pteOverall: [47, 54],
     ieltsReading: 6.0,
     ieltsWriting: 6.0,
     ieltsListening: 6.0,
     ieltsSpeaking: 6.0,
+    ieltsOverall: 6.0,
   },
   {
-    pteReading: [36, 45],
-    pteWriting: [36, 45],
-    pteListening: [36, 45],
-    pteSpeaking: [36, 45],
+    pteReading: [42, 47],
+    pteWriting: [41, 50],
+    pteListening: [40, 46],
+    pteSpeaking: [39, 53],
+    pteOverall: [39, 46],
     ieltsReading: 5.5,
     ieltsWriting: 5.5,
     ieltsListening: 5.5,
     ieltsSpeaking: 5.5,
+    ieltsOverall: 5.5,
   },
   {
-    pteReading: [29, 35],
-    pteWriting: [29, 35],
-    pteListening: [29, 35],
-    pteSpeaking: [29, 35],
+    pteReading: [36, 41],
+    pteWriting: [29, 40],
+    pteListening: [33, 39],
+    pteSpeaking: [24, 38],
+    pteOverall: [31, 38],
     ieltsReading: 5.0,
     ieltsWriting: 5.0,
     ieltsListening: 5.0,
     ieltsSpeaking: 5.0,
+    ieltsOverall: 5.0,
   },
   {
-    pteReading: [23, 28],
-    pteWriting: [23, 28],
-    pteListening: [23, 28],
-    pteSpeaking: [23, 28],
+    pteReading: [29, 35],
+    pteWriting: [17, 28],
+    pteListening: [26, 32],
+    pteSpeaking: [14, 23],
+    pteOverall: [24, 30],
     ieltsReading: 4.5,
     ieltsWriting: 4.5,
     ieltsListening: 4.5,
     ieltsSpeaking: 4.5,
+    ieltsOverall: 4.5,
   },
 ]
 
@@ -239,11 +257,14 @@ export const clbEEScore = {
 
 export const getEqualScoresOfPTEAcademic = (
   scoreValue: string,
-  type: 'Listening' | 'Speaking' | 'Reading' | 'Writing',
+  type: 'Listening' | 'Speaking' | 'Reading' | 'Writing' | 'Overall',
 ) => {
   const scoreValueNum = Number(scoreValue)
   const resultItem = scoreListAcademic.find((item) => {
     const pteTypeScore = item[`pte${type}`]
+    if (!pteTypeScore) {
+      return false
+    }
     if (pteTypeScore.length > 1) {
       return (
         scoreValueNum <= pteTypeScore[1] && scoreValueNum >= pteTypeScore[0]
@@ -281,6 +302,7 @@ const RL = 'RL'
 const ASQ = 'ASQ'
 const SWT = 'SWT'
 const WE = 'WE'
+const SGD = 'SGD'
 
 const FIBRW = 'FIB-RW'
 const MCMR = 'MCM-R'
@@ -328,23 +350,23 @@ export const skillsAnalysis = {
 
 export const skillsAnalysisAcademic = {
   openResponseSpeakingWriting: {
-    component: [[WE, DI, RL]],
-    support: ['Speaking', 'Writing'],
-  },
-  reproducingSpokenWrittenLanguage: {
     component: [
-      [RA, RS, RL],
-      [SST, SWT, WFD, FIBL],
+      [DI, RL, SGD, RTS],
+      [WE, SWT, SST],
     ],
     support: ['Speaking', 'Writing'],
   },
+  reproducingSpokenWrittenLanguage: {
+    component: [[RA, RS], [WFD]],
+    support: ['Speaking', 'Writing'],
+  },
   writingExtended: { component: [[WE, SWT, SST]], support: ['Writing'] },
-  writingShort: { component: [[WFD, FIBRW, FIBL]], support: ['Writing'] },
-  speakingExtended: { component: [[DI, RL]], support: ['Speaking'] },
+  writingShort: { component: [[WFD]], support: ['Writing'] },
+  speakingExtended: { component: [[DI, RL, SGD, RTS]], support: ['Speaking'] },
   speakingShort: { component: [[RA, RS, ASQ]], support: ['Speaking'] },
   multipleSkillsComprehension: {
     component: [
-      [WFD, RS, RL, SST, FIBL, HCS, HIW, ASQ],
+      [WFD, RS, RL, SST, SGD, FIBL, HCS, HIW, ASQ],
       [RA, SWT, FIBRW],
     ],
     support: ['Listening', 'Reading'],

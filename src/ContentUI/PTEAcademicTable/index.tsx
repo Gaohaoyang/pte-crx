@@ -12,13 +12,14 @@ interface PTEAcademicTableProps {
     reading: number
     speaking: number
     writing: number
+    overall: number
   }
 }
 
 const PTEAcademicTable = (props: PTEAcademicTableProps) => {
   const { pteScore } = props
   const scoreList: {
-    name: 'Listening' | 'Speaking' | 'Reading' | 'Writing'
+    name: 'Listening' | 'Speaking' | 'Reading' | 'Writing' | 'Overall'
     score: number
     ieltsCore?: number
   }[] = [
@@ -26,6 +27,7 @@ const PTEAcademicTable = (props: PTEAcademicTableProps) => {
     { name: 'Reading', score: pteScore.reading },
     { name: 'Speaking', score: pteScore.speaking },
     { name: 'Writing', score: pteScore.writing },
+    { name: 'Overall', score: pteScore.overall },
   ]
 
   scoreList.forEach((item) => {
@@ -39,6 +41,7 @@ const PTEAcademicTable = (props: PTEAcademicTableProps) => {
     reading?: number
     speaking?: number
     writing?: number
+    overall?: number
   }[] = [
     {
       testName: 'PTE',
@@ -46,6 +49,7 @@ const PTEAcademicTable = (props: PTEAcademicTableProps) => {
       reading: pteScore.reading,
       speaking: pteScore.speaking,
       writing: pteScore.writing,
+      overall: pteScore.overall,
     },
     {
       testName: 'IELTS',
@@ -53,6 +57,7 @@ const PTEAcademicTable = (props: PTEAcademicTableProps) => {
       reading: scoreList[1].ieltsCore,
       speaking: scoreList[2].ieltsCore,
       writing: scoreList[3].ieltsCore,
+      overall: scoreList[4].ieltsCore,
     },
   ]
 
@@ -85,7 +90,11 @@ const PTEAcademicTable = (props: PTEAcademicTableProps) => {
               <PiPenNib className="text-slate-600" />
             </div>
           </th>
-          {/* <th className="border-l border-slate-400 px-2">Total</th> */}
+          <th className="px-2">
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-xs">Overall</div>
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody className="">
@@ -110,6 +119,7 @@ const PTEAcademicTable = (props: PTEAcademicTableProps) => {
             <td>{item.reading}</td>
             <td>{item.speaking}</td>
             <td>{item.writing}</td>
+            <td>{item.overall}</td>
 
             {/* <td className="border-l border-slate-400">
               {item.testName === 'Points for EE(Without Spouse)' ||

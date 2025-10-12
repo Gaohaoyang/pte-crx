@@ -15,6 +15,42 @@ import PTECoreTable from './PTECoreTable'
 import { AppointmentsType } from '../type/AppointmentsType'
 import PTEAcademicTable from './PTEAcademicTable'
 
+const useCountAnimation = (targetValue: number, duration = 1000, delay = 0) => {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    const startTime = Date.now() + delay
+    const endValue = targetValue
+
+    const animate = () => {
+      const now = Date.now()
+      if (now < startTime) {
+        requestAnimationFrame(animate)
+        return
+      }
+
+      const progress = Math.min((now - startTime) / duration, 1)
+      const currentCount = Math.floor(progress * endValue)
+
+      setCount(currentCount)
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+
+    const rafId = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafId)
+  }, [targetValue, duration, delay])
+
+  return count
+}
+
+const AnimatedScore = ({ score, delay }: { score: number; delay: number }) => {
+  const animatedScore = useCountAnimation(score, 1000, delay)
+  return <>{animatedScore}</>
+}
+
 const ContentUI = () => {
   const [pteScore, setPteScore] = useState<{
     listening: number
@@ -127,7 +163,6 @@ const ContentUI = () => {
             })
           }
         }
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         console.log('error--->', error)
       }
@@ -276,7 +311,8 @@ const ContentUI = () => {
               {examName?.originName} Score
               <div className="flex items-center">
                 <div className="mr-2 text-xs">
-                  Test Date: {pteData?.testDate.substring(0, 10).replace(/-/g, '/')}
+                  Test Date:{' '}
+                  {pteData?.testDate.substring(0, 10).replace(/-/g, '/')}
                 </div>
                 <a href="https://github.com/Gaohaoyang/pte-crx" target="_blank">
                   <VscGithubInverted className="text-slate-300 transition-all duration-300 hover:scale-110 hover:cursor-pointer hover:text-slate-900" />
@@ -287,12 +323,14 @@ const ContentUI = () => {
               <PTECoreTable pteScore={pteScore} />
             ) : null}
             {pteScore && examName?.name === 'PTEAcademic' ? (
-              <PTEAcademicTable pteScore={pteScore} />
+              <PTEAcademicTable
+                pteScore={{ ...pteScore, overall: Number(pteData?.gseScore) }}
+              />
             ) : null}
 
             <div className="mt-2 text-base font-bold">Sub-Skills Score</div>
             <div className="">
-              {skillsProfile.map((skill) => (
+              {skillsProfile.map((skill, index) => (
                 <div key={skill.key} className="mb-3">
                   <div className="flex items-end justify-between">
                     <div className="text-slate-700">{skill.name}</div>
@@ -306,7 +344,7 @@ const ContentUI = () => {
                       </div>
                       <div
                         className={clsx(
-                          'ml-2 font-bold',
+                          'ml-2 w-5 font-bold',
                           skill.score < 80
                             ? skill.score < 60
                               ? 'text-red-700'
@@ -314,7 +352,10 @@ const ContentUI = () => {
                             : 'text-green-700',
                         )}
                       >
-                        {skill.score}
+                        <AnimatedScore
+                          score={skill.score}
+                          delay={index * 100}
+                        />
                       </div>
                       <div className="flex w-8 items-center justify-end">
                         {skill.support.map((support, index) => {
@@ -352,7 +393,7 @@ const ContentUI = () => {
                       </div>
                     </div>
                   </div>
-                  <ProgressBar progress={skill.score} />
+                  <ProgressBar progress={skill.score} delay={index * 100} />
                 </div>
               ))}
               <div className="text-right text-xs">
@@ -367,6 +408,60 @@ const ContentUI = () => {
               </div>
             </div>
           </div>
+          {examName?.name === 'PTECore' && (
+            <div
+              className={clsx(
+                'absolute left-full top-0 ml-6 box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-800 shadow-cyan-950/55 transition-all',
+                minimize
+                  ? 'h-0 w-0 overflow-hidden p-0 opacity-0'
+                  : 'h-auto max-h-[81vh] w-auto p-2 opacity-100',
+                dragging ? 'scale-[1.02] shadow-xl' : 'scale-100 shadow-md',
+              )}
+            >
+              <a
+                className="relative block w-[220px] rounded-xl border p-2 text-slate-800 transition-all hover:border-cyan-500 hover:no-underline"
+                href="https://ynwac.com/register?code=HYG"
+                target="_blank"
+              >
+                <div className="absolute right-2 top-2 rounded-lg border bg-white/80 px-2 py-0.5 text-xs">
+                  Ad
+                </div>
+                <span className="relative text-xl tracking-wide text-gray-900">
+                  <span className="bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text font-sans font-black text-transparent">
+                    YNWAC
+                  </span>
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gradient-to-r from-blue-500 to-green-400 font-black"></span>
+                </span>
+                <div className="mt-2">PTE-Core 一站式练习网站</div>
+                <div className="">All-in-one practice website</div>
+                <div className="">只要开始，就有收获！Just start!</div>
+                <div className="mt-2 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500/90 to-cyan-500/90 py-1 text-white transition-all hover:from-blue-600 hover:to-cyan-600">
+                  开始练习 Start practicing
+                </div>
+                {/* <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white" onClick={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                  console.log('复制成绩')
+                  console.log(pteData)
+                  const clipboardData = {
+                    gseScore: pteData?.gseScore,
+                    communicativeSkills: pteData?.communicativeSkills,
+                    skillsProfile: pteData?.skillsProfile,
+                    testDate: pteData?.testDate,
+                    testCenter: pteData?.testCenter,
+                    testCenterId: pteData?.testCenterId,
+                    testCenterCountry: pteData?.testCenterCountry,
+                    // firstName: pteData?.firstName,
+                    // lastName: pteData?.lastName,
+                  }
+                  console.log(clipboardData)
+                  navigator.clipboard.writeText(JSON.stringify(clipboardData))
+                }}>
+                  复制成绩
+                </div> */}
+              </a>
+            </div>
+          )}
         </div>
       </Draggable>
     </>
