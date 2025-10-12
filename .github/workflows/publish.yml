@@ -56,15 +56,15 @@ jobs:
         with:
           args: zip -qq -r dist.zip dist
 
-      - name: Upload & release
-        if: steps.check.outputs.changed == 'true'
-        uses: mnao305/chrome-extension-upload@v5.0.0
-        with:
-          file-path: dist.zip
-          extension-id: hibclclepijigjnfdkmkfhjogfhgicda
-          client-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+      # - name: Upload & release
+      #   if: steps.check.outputs.changed == 'true'
+      #   uses: mnao305/chrome-extension-upload@v5.0.0
+      #   with:
+      #     file-path: dist.zip
+      #     extension-id: hibclclepijigjnfdkmkfhjogfhgicda
+      #     client-id: ${{ secrets.CLIENT_ID }}
+      #     client-secret: ${{ secrets.CLIENT_SECRET }}
+      #     refresh-token: ${{ secrets.REFRESH_TOKEN }}
 
       - name: Upload & release Edge
         if: steps.check.outputs.changed == 'true'
