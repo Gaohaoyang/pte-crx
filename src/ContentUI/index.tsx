@@ -14,6 +14,7 @@ import { VscGithubInverted } from 'react-icons/vsc'
 import PTECoreTable from './PTECoreTable'
 import { AppointmentsType } from '../type/AppointmentsType'
 import PTEAcademicTable from './PTEAcademicTable'
+import { Toaster, toast } from 'sonner'
 
 const useCountAnimation = (targetValue: number, duration = 1000, delay = 0) => {
   const [count, setCount] = useState(0)
@@ -260,6 +261,24 @@ const ContentUI = () => {
 
   return (
     <>
+      <Toaster
+        richColors
+        position="top-left"
+        offset={{ top: '16px', left: '38px' }}
+        closeButton
+        duration={4500}
+        toastOptions={{
+          classNames: {
+            toast: '!bg-gradient-to-r !from-sky-50 !via-cyan-50 !to-blue-100',
+            closeButton: '!text-slate-700 !bg-sky-100/75',
+            title: '!text-slate-700',
+            // description: 'text-slate-900',
+            // actionButton: 'text-slate-900',
+            // closeButton: 'text-slate-900',
+            // cancelButton: 'text-slate-900',
+          },
+        }}
+      />
       <Draggable
         handle="strong"
         onStart={() => {
@@ -398,7 +417,7 @@ const ContentUI = () => {
               ))}
               <div className="text-right text-xs">
                 <a
-                  className="w-full font-semibold italic text-sky-700 !no-underline opacity-10 transition-opacity hover:opacity-100"
+                  className="w-full font-semibold italic text-sky-700 !no-underline opacity-30 transition-opacity hover:opacity-100"
                   target="_blank"
                   href="https://gaohaoyang.github.io/pte-crx-page/?scrollTo=donation"
                 >
@@ -438,27 +457,50 @@ const ContentUI = () => {
                 <div className="mt-2 flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500/90 to-cyan-500/90 py-1 text-white transition-all hover:from-blue-600 hover:to-cyan-600">
                   开始练习 Start practicing
                 </div>
-                {/* <div className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white" onClick={(e) => {
+                <div
+                  className="mt-2 flex items-center justify-center rounded-lg bg-cyan-500 py-1 text-white hover:bg-cyan-600"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    e.preventDefault()
+                    // console.log('复制成绩')
+                    // console.log(pteData)
+                    const clipboardData = {
+                      gseScore: pteData?.gseScore,
+                      communicativeSkills: pteData?.communicativeSkills,
+                      skillsProfile: pteData?.skillsProfile,
+                      testDate: pteData?.testDate,
+                      testCenter: pteData?.testCenter,
+                      testCenterId: pteData?.testCenterId,
+                      testCenterCountry: pteData?.testCenterCountry,
+                      // firstName: pteData?.firstName,
+                      // lastName: pteData?.lastName,
+                    }
+                    // console.log(clipboardData)
+                    navigator.clipboard.writeText(JSON.stringify(clipboardData))
+                    toast.message(() => (
+                      <div>
+                        <div>
+                          成绩已复制到剪贴板
+                          <br />
+                          You have copied the score to the clipboard
+                        </div>
+                        <a
+                          className="text-blue-500"
+                          href="https://ynwac.com/transcript"
+                          target="_blank"
+                        >
+                          前往YNWAC导入成绩 Import to YNWAC
+                        </a>
+                      </div>
+                    ))
+                  }}
+                >
+                  复制成绩 Copy score
+                </div>
+                <div className="text-xs text-slate-400 mt-1 cursor-default" onClick={(e) => {
                   e.stopPropagation()
                   e.preventDefault()
-                  console.log('复制成绩')
-                  console.log(pteData)
-                  const clipboardData = {
-                    gseScore: pteData?.gseScore,
-                    communicativeSkills: pteData?.communicativeSkills,
-                    skillsProfile: pteData?.skillsProfile,
-                    testDate: pteData?.testDate,
-                    testCenter: pteData?.testCenter,
-                    testCenterId: pteData?.testCenterId,
-                    testCenterCountry: pteData?.testCenterCountry,
-                    // firstName: pteData?.firstName,
-                    // lastName: pteData?.lastName,
-                  }
-                  console.log(clipboardData)
-                  navigator.clipboard.writeText(JSON.stringify(clipboardData))
-                }}>
-                  复制成绩
-                </div> */}
+                }}>* 点击可复制成绩，获取YNWAC专业成绩分析和备考建议</div>
               </a>
             </div>
           )}
