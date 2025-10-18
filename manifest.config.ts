@@ -29,7 +29,10 @@ export default defineManifest(async (env) => ({
   content_scripts: [
     {
       js: ['src/content.tsx'],
-      matches: ['https://mypte.pearsonpte.com/*'],
+      matches: [
+        'https://mypte.pearsonpte.com/*',
+        'https://partner.pearsonpte.com/*',
+      ],
       run_at: 'document_start',
       all_frames: true,
     },
@@ -42,7 +45,10 @@ export default defineManifest(async (env) => ({
     // },
     {
       resources: ['injected.js'],
-      matches: ['https://mypte.pearsonpte.com/*'],
+      matches: [
+        'https://mypte.pearsonpte.com/*',
+        'https://partner.pearsonpte.com/*',
+      ],
     },
   ],
 }))
