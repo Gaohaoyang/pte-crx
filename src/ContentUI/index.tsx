@@ -14,6 +14,7 @@ import { VscGithubInverted } from 'react-icons/vsc'
 import PTECoreTable from './PTECoreTable'
 import { AppointmentsType } from '../type/AppointmentsType'
 import PTEAcademicTable from './PTEAcademicTable'
+import PTEAcademicQuestionScores from './PTEAcademicQuestionScores'
 import { Toaster, toast } from 'sonner'
 
 const useCountAnimation = (targetValue: number, duration = 1000, delay = 0) => {
@@ -502,6 +503,23 @@ const ContentUI = () => {
                   e.preventDefault()
                 }}>* 点击可复制成绩，获取YNWAC专业成绩分析和备考建议</div>
               </a>
+            </div>
+          )}
+          {examName?.name === 'PTEAcademic' && pteScore && (
+          // {pteScore && (
+            <div
+              className={clsx(
+                'absolute left-full top-0 ml-6 box-border flex flex-col overflow-auto rounded-xl bg-sky-50 text-sm text-slate-800 shadow-cyan-950/55 transition-all',
+                minimize
+                  ? 'h-0 w-0 overflow-hidden p-0 opacity-0'
+                  : 'h-auto max-h-[81vh] w-auto p-3 opacity-100',
+                dragging ? 'scale-[1.02] shadow-xl' : 'scale-100 shadow-md',
+              )}
+            >
+              <PTEAcademicQuestionScores
+                pteScore={{ ...pteScore, overall: Number(pteData?.gseScore) }}
+                skillsProfile={pteData?.skillsProfile}
+              />
             </div>
           )}
         </div>
