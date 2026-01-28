@@ -379,3 +379,297 @@ export const skillsAnalysisAcademic = {
     support: ['Listening', 'Reading'],
   },
 }
+
+// PTE Academic Question Weighting Table
+// Source: PTE Academic Scoring Information for Teachers and Partners (2025)
+export type SubSkillKey =
+  | 'openResponseSpeakingWriting'
+  | 'reproducingSpokenWrittenLanguage'
+  | 'writingExtended'
+  | 'writingShort'
+  | 'speakingExtended'
+  | 'speakingShort'
+  | 'multipleSkillsComprehension'
+  | 'singleSkillComprehension'
+
+export interface QuestionWeighting {
+  abbr: string
+  name: string
+  overall: number
+  listening?: number
+  reading?: number
+  speaking?: number
+  writing?: number
+  subSkills?: SubSkillKey[]
+}
+
+export const pteAcademicWeighting: {
+  speakingWriting: QuestionWeighting[]
+  reading: QuestionWeighting[]
+  listening: QuestionWeighting[]
+} = {
+  // Speaking & Writing section
+  speakingWriting: [
+    {
+      abbr: RA,
+      name: 'Read Aloud',
+      overall: 4,
+      speaking: 9,
+      subSkills: [
+        'speakingShort',
+        'reproducingSpokenWrittenLanguage',
+        'multipleSkillsComprehension',
+      ],
+    },
+    {
+      abbr: RS,
+      name: 'Repeat Sentence',
+      overall: 7,
+      listening: 17,
+      speaking: 16,
+      subSkills: [
+        'speakingShort',
+        'reproducingSpokenWrittenLanguage',
+        'multipleSkillsComprehension',
+      ],
+    },
+    {
+      abbr: DI,
+      name: 'Describe Image',
+      overall: 15,
+      speaking: 31,
+      subSkills: ['speakingExtended', 'openResponseSpeakingWriting'],
+    },
+    {
+      abbr: RL,
+      name: 'Retell Lecture',
+      overall: 6,
+      listening: 13,
+      speaking: 13,
+      subSkills: [
+        'speakingExtended',
+        'openResponseSpeakingWriting',
+        'multipleSkillsComprehension',
+      ],
+    },
+    {
+      abbr: ASQ,
+      name: 'Answer Short Question',
+      overall: 2,
+      listening: 4,
+      subSkills: ['speakingShort', 'multipleSkillsComprehension'],
+    },
+    {
+      abbr: SGD,
+      name: 'Summarize Group Discussion',
+      overall: 9,
+      listening: 20,
+      speaking: 19,
+      subSkills: [
+        'speakingExtended',
+        'openResponseSpeakingWriting',
+        'multipleSkillsComprehension',
+      ],
+    },
+    {
+      abbr: RTS,
+      name: 'Respond to a Situation',
+      overall: 6,
+      speaking: 13,
+      subSkills: ['speakingExtended', 'openResponseSpeakingWriting'],
+    },
+    {
+      abbr: SWT,
+      name: 'Summarize Written Text',
+      overall: 7,
+      reading: 23,
+      writing: 28,
+      subSkills: [
+        'writingExtended',
+        'openResponseSpeakingWriting',
+        'multipleSkillsComprehension',
+      ],
+    },
+    {
+      abbr: WE,
+      name: 'Write Essay',
+      overall: 7,
+      writing: 31,
+      subSkills: ['writingExtended', 'openResponseSpeakingWriting'],
+    },
+  ],
+  // Reading section
+  reading: [
+    {
+      abbr: FIBRW,
+      name: 'Fill in the Blanks (Dropdown)',
+      overall: 7,
+      reading: 25,
+      subSkills: ['multipleSkillsComprehension'],
+    },
+    {
+      abbr: MCMR,
+      name: 'MC Multiple Answers',
+      overall: 1,
+      reading: 5,
+      subSkills: ['singleSkillComprehension'],
+    },
+    {
+      abbr: RO,
+      name: 'Reorder Paragraph',
+      overall: 3,
+      reading: 9,
+      subSkills: ['singleSkillComprehension'],
+    },
+    {
+      abbr: FIBR,
+      name: 'Fill in the Blanks (Drag & Drop)',
+      overall: 6,
+      reading: 20,
+      subSkills: ['singleSkillComprehension'],
+    },
+    {
+      abbr: MCSR,
+      name: 'MC Single Answer',
+      overall: 0.5,
+      reading: 3,
+      subSkills: ['singleSkillComprehension'],
+    },
+  ],
+  // Listening section
+  listening: [
+    {
+      abbr: SST,
+      name: 'Summarize Spoken Text',
+      overall: 4,
+      listening: 10,
+      writing: 18,
+      subSkills: [
+        'writingExtended',
+        'openResponseSpeakingWriting',
+        'multipleSkillsComprehension',
+      ],
+    },
+    {
+      abbr: MCML,
+      name: 'MC Multiple Answers',
+      overall: 1,
+      listening: 3,
+      subSkills: ['singleSkillComprehension'],
+    },
+    {
+      abbr: FIBL,
+      name: 'Fill in the Blanks (Type In)',
+      overall: 3,
+      listening: 8,
+      subSkills: ['multipleSkillsComprehension'],
+    },
+    {
+      abbr: HCS,
+      name: 'Highlight Correct Summary',
+      overall: 0.5,
+      listening: 2,
+      reading: 3,
+      subSkills: ['multipleSkillsComprehension'],
+    },
+    {
+      abbr: MCSL,
+      name: 'MC Single Answer',
+      overall: 0.5,
+      listening: 2,
+      subSkills: ['singleSkillComprehension'],
+    },
+    {
+      abbr: SMW,
+      name: 'Select Missing Word',
+      overall: 1,
+      listening: 1,
+      subSkills: ['singleSkillComprehension'],
+    },
+    {
+      abbr: HIW,
+      name: 'Highlight Incorrect Words',
+      overall: 4,
+      listening: 8,
+      reading: 13,
+      subSkills: ['multipleSkillsComprehension'],
+    },
+    {
+      abbr: WFD,
+      name: 'Write from Dictation',
+      overall: 5,
+      listening: 13,
+      writing: 23,
+      subSkills: [
+        'writingShort',
+        'reproducingSpokenWrittenLanguage',
+        'multipleSkillsComprehension',
+      ],
+    },
+  ],
+}
+
+// Calculate estimated score for a question type based on weighted average of skill scores
+// Combines Sub-Skills scores (primary) with skill weights (secondary) for better accuracy
+export const calculateQuestionTypeScore = (
+  item: QuestionWeighting,
+  scores: {
+    listening: number
+    reading: number
+    speaking: number
+    writing: number
+    overall: number
+  },
+  skillsProfile?: {
+    openResponseSpeakingWriting: number
+    reproducingSpokenWrittenLanguage: number
+    writingExtended: number
+    writingShort: number
+    speakingExtended: number
+    speakingShort: number
+    multipleSkillsComprehension: number
+    singleSkillComprehension: number
+  },
+): number => {
+  // Calculate skill-weighted score (original logic)
+  let totalWeight = 0
+  let weightedSum = 0
+
+  if (item.overall) {
+    weightedSum += scores.overall * item.overall
+    totalWeight += item.overall
+  }
+  if (item.listening) {
+    weightedSum += scores.listening * item.listening
+    totalWeight += item.listening
+  }
+  if (item.reading) {
+    weightedSum += scores.reading * item.reading
+    totalWeight += item.reading
+  }
+  if (item.speaking) {
+    weightedSum += scores.speaking * item.speaking
+    totalWeight += item.speaking
+  }
+  if (item.writing) {
+    weightedSum += scores.writing * item.writing
+    totalWeight += item.writing
+  }
+
+  const skillWeightedScore = totalWeight > 0 ? weightedSum / totalWeight : 0
+
+  // If no skillsProfile or no subSkills mapping, return skill-weighted score
+  if (!skillsProfile || !item.subSkills || item.subSkills.length === 0) {
+    return Math.round(skillWeightedScore * 10) / 10
+  }
+
+  // Calculate Sub-Skills average score
+  const subSkillScores = item.subSkills.map((sk) => skillsProfile[sk])
+  const subSkillAvg =
+    subSkillScores.reduce((a, b) => a + b, 0) / subSkillScores.length
+
+  // Combine: Sub-Skills score (60%) + skill-weighted score (40%)
+  const combinedScore = subSkillAvg * 0.6 + skillWeightedScore * 0.4
+
+  return Math.round(combinedScore * 10) / 10
+}
